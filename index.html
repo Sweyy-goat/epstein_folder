@@ -2,347 +2,298 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D0610">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Christa 🌸</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --pink:#FF6B9D;--rose:#FF4B7B;--blush:#FFB3CC;
-  --lavender:#C084FC;--violet:#A855F7;--gold:#FBBF24;
-  --soft:#FF8FB3;
-}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-html{scroll-behavior:smooth;}
-body{background:#0D0610;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+  :root {
+    --pink:#FF6B9D;--rose:#FF4B7B;--blush:#FFB3CC;
+    --lavender:#C084FC;--violet:#A855F7;--gold:#FBBF24;
+    --soft:#FF8FB3;
+    --intensity:1;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:#0D0610;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden;}
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:.75rem 1rem;padding-top:calc(.75rem + env(safe-area-inset-top));
-  background:rgba(13,6,16,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(255,107,157,.15);
-}
-.nav-logo{font-family:'Dancing Script',cursive;font-size:1.4rem;background:linear-gradient(135deg,var(--pink),var(--lavender));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.nav-scroll{display:flex;gap:.6rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-right:.25rem;}
-.nav-scroll::-webkit-scrollbar{display:none;}
-.nav-scroll a{
-  color:rgba(255,255,255,.65);text-decoration:none;font-size:.72rem;letter-spacing:.04em;
-  text-transform:uppercase;transition:color .2s;white-space:nowrap;
-  padding:.3rem .55rem;border-radius:100px;border:1px solid transparent;flex-shrink:0;
-}
-.nav-scroll a:hover,.nav-scroll a:active{color:var(--pink);border-color:rgba(255,107,157,.3);}
+  #vis-slider-wrap{
+    position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;
+    background:rgba(13,6,16,0.85);border:1px solid rgba(255,107,157,0.25);
+    border-radius:20px;padding:.85rem 1.2rem;
+    backdrop-filter:blur(20px);
+    display:flex;align-items:center;gap:.75rem;
+    box-shadow:0 8px 40px rgba(255,107,157,0.12);
+  }
+  #vis-slider-wrap label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);white-space:nowrap;}
+  #vis-slider{
+    -webkit-appearance:none;appearance:none;
+    width:90px;height:4px;border-radius:2px;outline:none;cursor:pointer;
+    background:linear-gradient(90deg,var(--pink),var(--lavender));
+  }
+  #vis-slider::-webkit-slider-thumb{
+    -webkit-appearance:none;width:16px;height:16px;border-radius:50%;
+    background:var(--pink);box-shadow:0 0 8px rgba(255,107,157,.6);
+    cursor:pointer;border:2px solid #fff;
+  }
+  #vis-icon{font-size:1rem;}
 
-/* ── CANVAS BG ── */
-#constellation-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
-#particles{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
-.particle{position:absolute;border-radius:50%;animation:float-up linear infinite;opacity:0;}
-@keyframes float-up{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:.7;}90%{opacity:.3;}100%{transform:translateY(-20vh) scale(1.4);opacity:0;}}
+  #constellation-canvas{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    transition:opacity .5s;
+  }
 
-/* ── VISUAL SLIDER ── */
-#vis-slider-wrap{
-  position:fixed;bottom:calc(1.25rem + env(safe-area-inset-bottom));right:1rem;z-index:300;
-  background:rgba(13,6,16,.9);border:1px solid rgba(255,107,157,.25);
-  border-radius:20px;padding:.7rem 1rem;
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  display:flex;align-items:center;gap:.6rem;
-  box-shadow:0 8px 30px rgba(255,107,157,.12);
-}
-#vis-slider-wrap label{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);}
-#vis-slider{-webkit-appearance:none;appearance:none;width:70px;height:4px;border-radius:2px;outline:none;cursor:pointer;background:linear-gradient(90deg,var(--pink),var(--lavender));}
-#vis-slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--pink);box-shadow:0 0 8px rgba(255,107,157,.6);cursor:pointer;border:2px solid #fff;}
-#vis-icon{font-size:.95rem;}
+  #particles{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
+  .particle{position:absolute;border-radius:50%;animation:float-up linear infinite;opacity:0;}
+  @keyframes float-up{
+    0%{transform:translateY(100vh) scale(0);opacity:0;}
+    10%{opacity:.8;}90%{opacity:.4;}
+    100%{transform:translateY(-20vh) scale(1.5);opacity:0;}
+  }
 
-/* ── HERO ── */
-#hero{
-  min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  position:relative;text-align:center;
-  padding:calc(4.5rem + env(safe-area-inset-top)) 1.25rem 3rem;
-  overflow:hidden;z-index:2;
-}
-.hero-glow{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;animation:pulse-glow 4s ease-in-out infinite alternate;}
-.glow-1{width:320px;height:320px;background:rgba(255,107,157,.18);top:-80px;left:-80px;}
-.glow-2{width:280px;height:280px;background:rgba(192,132,252,.14);bottom:0;right:-80px;animation-delay:2s;}
-.glow-3{width:200px;height:200px;background:rgba(251,191,36,.09);top:45%;left:50%;transform:translateX(-50%);}
-@keyframes pulse-glow{from{opacity:.5;transform:scale(1);}to{opacity:1;transform:scale(1.15);}}
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1rem 2rem;
+    background:rgba(13,6,16,.7);backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(255,107,157,.15);
+  }
+  .nav-logo{font-family:'Dancing Script',cursive;font-size:1.5rem;background:linear-gradient(135deg,var(--pink),var(--lavender));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .nav-links{display:flex;gap:1.5rem;}
+  .nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;transition:color .3s;}
+  .nav-links a:hover{color:var(--pink);}
 
-.hero-eyebrow{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blush);margin-bottom:1.25rem;animation:fade-up .7s ease both;}
-.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,18vw,7rem);font-weight:900;line-height:.88;margin-bottom:.4rem;animation:fade-up .7s ease .15s both;}
-.hero-title span{display:block;background:linear-gradient(135deg,#FF6B9D 0%,#C084FC 50%,#FF6B9D 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;}
-@keyframes shimmer{to{background-position:200% center;}}
-.hero-name{font-family:'Dancing Script',cursive;font-size:clamp(2rem,10vw,5rem);color:var(--gold);animation:fade-up .7s ease .3s both;text-shadow:0 0 50px rgba(251,191,36,.35);}
-.hero-sub{margin-top:1.25rem;font-size:1rem;color:rgba(255,255,255,.5);font-weight:300;max-width:340px;line-height:1.7;animation:fade-up .7s ease .45s both;}
-.hero-date{
-  margin-top:1rem;display:inline-block;padding:.45rem 1.25rem;
-  border:1px solid rgba(255,107,157,.3);border-radius:100px;
-  font-size:.8rem;color:var(--blush);letter-spacing:.08em;animation:fade-up .7s ease .6s both;
-}
-.hero-cta{margin-top:2rem;display:flex;gap:.75rem;flex-direction:column;width:100%;max-width:280px;animation:fade-up .7s ease .75s both;}
-@keyframes fade-up{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+  #hero{
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    position:relative;text-align:center;padding:6rem 2rem 4rem;overflow:hidden;z-index:2;
+  }
+  .hero-glow{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;animation:pulse-glow 4s ease-in-out infinite alternate;}
+  .glow-1{width:500px;height:500px;background:rgba(255,107,157,.15);top:-100px;left:-100px;}
+  .glow-2{width:400px;height:400px;background:rgba(192,132,252,.12);bottom:0;right:-100px;animation-delay:2s;}
+  .glow-3{width:300px;height:300px;background:rgba(251,191,36,.08);top:40%;left:50%;transform:translateX(-50%);}
+  @keyframes pulse-glow{from{opacity:.5;transform:scale(1);}to{opacity:1;transform:scale(1.2);}}
 
-/* ── BUTTONS ── */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
-  padding:.9rem 1.75rem;border-radius:100px;font-size:.92rem;font-weight:500;
-  text-decoration:none;cursor:pointer;border:none;
-  transition:transform .15s,box-shadow .15s;font-family:'Inter',sans-serif;
-  min-height:48px;/* accessible tap target */
-}
-.btn:active{transform:scale(.97);}
-.btn-primary{background:linear-gradient(135deg,var(--rose),var(--violet));color:#fff;box-shadow:0 8px 28px rgba(255,75,123,.32);}
-.btn-primary:active{box-shadow:0 4px 14px rgba(255,75,123,.4);}
-.btn-ghost{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.16);}
-.btn-ghost:active{background:rgba(255,255,255,.12);}
+  .hero-eyebrow{font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;color:var(--blush);margin-bottom:1.5rem;animation:fade-up .8s ease both;}
+  .hero-title{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,12vw,9rem);font-weight:900;line-height:.9;margin-bottom:.5rem;animation:fade-up .8s ease .2s both;}
+  .hero-title span{display:block;background:linear-gradient(135deg,#FF6B9D 0%,#C084FC 50%,#FF6B9D 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s linear infinite;}
+  @keyframes shimmer{to{background-position:200% center;}}
+  .hero-name{font-family:'Dancing Script',cursive;font-size:clamp(2.5rem,8vw,6rem);color:var(--gold);animation:fade-up .8s ease .4s both;text-shadow:0 0 60px rgba(251,191,36,.4);}
+  .hero-sub{margin-top:1.5rem;font-size:1.1rem;color:rgba(255,255,255,.55);font-weight:300;max-width:450px;line-height:1.7;animation:fade-up .8s ease .6s both;}
+  .hero-date{margin-top:1rem;display:inline-block;padding:.5rem 1.5rem;border:1px solid rgba(255,107,157,.3);border-radius:100px;font-size:.85rem;color:var(--blush);letter-spacing:.1em;animation:fade-up .8s ease .8s both;}
+  .hero-cta{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fade-up .8s ease 1s both;}
+  @keyframes fade-up{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
 
-/* ── SECTIONS ── */
-.section{padding:3.5rem 1.25rem;position:relative;z-index:2;}
-.section-label{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--pink);margin-bottom:.75rem;text-align:center;}
-.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.75rem,7vw,3rem);font-weight:700;color:#fff;text-align:center;margin-bottom:2rem;}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 2rem;border-radius:100px;font-size:.9rem;font-weight:500;text-decoration:none;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s;font-family:'Inter',sans-serif;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:linear-gradient(135deg,var(--rose),var(--violet));color:#fff;box-shadow:0 8px 30px rgba(255,75,123,.35);}
+  .btn-primary:hover{box-shadow:0 12px 40px rgba(255,75,123,.5);}
+  .btn-ghost{background:rgba(255,255,255,.05);color:#fff;border:1px solid rgba(255,255,255,.15);}
+  .btn-ghost:hover{background:rgba(255,255,255,.1);}
 
-/* ── COUNTDOWN ── */
-.countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;max-width:440px;margin:0 auto;}
-.countdown-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,107,157,.15);border-radius:16px;padding:1rem .5rem;text-align:center;transition:border-color .3s;}
-.countdown-card:hover{border-color:rgba(255,107,157,.4);}
-.countdown-num{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,7vw,3rem);font-weight:900;background:linear-gradient(135deg,var(--pink),var(--lavender));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
-.countdown-lbl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.35rem;}
-.birthday-msg{margin-top:1.75rem;font-family:'Dancing Script',cursive;font-size:1.75rem;color:var(--gold);display:none;text-align:center;}
+  .section-label{font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:var(--pink);margin-bottom:1rem;}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;margin-bottom:3rem;color:#fff;}
 
-/* ── CONSTELLATION ── */
-#constell-interactive{
-  width:100%;height:min(55vw,320px);
-  border:1px solid rgba(255,107,157,.15);border-radius:20px;
-  background:rgba(0,0,0,.4);cursor:crosshair;display:block;
-  touch-action:none;
-}
-.constell-hint{margin-top:.75rem;font-size:.75rem;color:rgba(255,255,255,.3);letter-spacing:.04em;text-align:center;line-height:1.5;}
-.constell-btns{display:flex;gap:.5rem;justify-content:center;margin-top:.85rem;flex-wrap:wrap;}
-.constell-btns .btn{font-size:.78rem;padding:.55rem 1rem;min-height:40px;}
+  #countdown{padding:5rem 2rem;text-align:center;position:relative;z-index:2;}
+  .countdown-grid{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;max-width:700px;margin:0 auto;}
+  .countdown-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,107,157,.15);border-radius:20px;padding:1.5rem 2rem;min-width:120px;backdrop-filter:blur(10px);transition:border-color .3s,transform .3s;}
+  .countdown-card:hover{border-color:rgba(255,107,157,.4);transform:translateY(-4px);}
+  .countdown-num{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;background:linear-gradient(135deg,var(--pink),var(--lavender));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+  .countdown-lbl{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.4rem;}
+  .birthday-msg{margin-top:2rem;font-family:'Dancing Script',cursive;font-size:2rem;color:var(--gold);display:none;}
 
-/* ── NOTES ── */
-.notes-grid{display:grid;grid-template-columns:1fr;gap:1rem;}
-@media(min-width:480px){.notes-grid{grid-template-columns:1fr 1fr;}}
-.note-card{
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,107,157,.12);border-radius:18px;
-  padding:1.5rem;position:relative;overflow:hidden;cursor:pointer;
-  transition:transform .25s,border-color .25s;
-}
-.note-card:hover,.note-card:active{transform:translateY(-3px);border-color:rgba(255,107,157,.3);}
-.note-icon{font-size:1.75rem;margin-bottom:.75rem;}
-.note-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:.6rem;color:#fff;}
-.note-body{font-size:.85rem;color:rgba(255,255,255,.52);line-height:1.65;}
+  #constellation-section{padding:5rem 2rem;text-align:center;position:relative;z-index:2;}
+  #constell-interactive{
+    width:100%;max-width:800px;height:420px;margin:2rem auto 0;
+    border:1px solid rgba(255,107,157,.15);border-radius:28px;
+    background:rgba(0,0,0,.35);cursor:crosshair;display:block;
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 60px rgba(192,132,252,.08) inset;
+  }
+  .constell-hint{margin-top:1rem;font-size:.8rem;color:rgba(255,255,255,.3);letter-spacing:.05em;}
 
-/* ── GAMES ── */
-#games{background:rgba(255,255,255,.015);}
-.games-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;max-width:480px;margin:0 auto;}
-.game-card{
-  background:rgba(255,255,255,.04);border:1px solid rgba(192,132,252,.2);border-radius:20px;
-  padding:1.5rem 1rem;cursor:pointer;text-align:center;
-  transition:transform .2s,border-color .2s,box-shadow .2s;
-}
-.game-card:active{transform:scale(.97);}
-.game-card:hover{transform:translateY(-5px) scale(1.02);border-color:rgba(192,132,252,.5);box-shadow:0 16px 48px rgba(192,132,252,.14);}
-.game-emoji{font-size:2.2rem;display:block;margin-bottom:.75rem;}
-.game-name{font-size:.9rem;font-weight:600;color:#fff;margin-bottom:.3rem;}
-.game-desc{font-size:.72rem;color:rgba(255,255,255,.42);}
+  #notes{padding:5rem 2rem;max-width:1100px;margin:0 auto;position:relative;z-index:2;}
+  .notes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem;}
+  .note-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,107,157,.12);border-radius:20px;padding:2rem;position:relative;overflow:hidden;cursor:pointer;transition:transform .3s,border-color .3s,background .3s;}
+  .note-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,107,157,.05),rgba(192,132,252,.05));opacity:0;transition:opacity .3s;}
+  .note-card:hover{transform:translateY(-6px);border-color:rgba(255,107,157,.3);}
+  .note-card:hover::before{opacity:1;}
+  .note-icon{font-size:2rem;margin-bottom:1rem;}
+  .note-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:.75rem;color:#fff;}
+  .note-body{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.7;}
 
-/* ── MEMORY JAR ── */
-.memory-input{
-  width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,107,157,.2);
-  border-radius:14px;padding:1rem 1.1rem;color:#fff;font-size:.95rem;
-  font-family:'Inter',sans-serif;resize:none;outline:none;transition:border-color .25s;
-}
-.memory-input:focus{border-color:rgba(255,107,157,.5);}
-.memory-input::placeholder{color:rgba(255,255,255,.28);}
-.memories-list{display:flex;flex-direction:column;gap:.75rem;text-align:left;max-height:320px;overflow-y:auto;margin-top:1.5rem;padding-right:.25rem;}
-.memories-list::-webkit-scrollbar{width:3px;}
-.memories-list::-webkit-scrollbar-thumb{background:rgba(255,107,157,.3);border-radius:2px;}
-.memory-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,107,157,.1);border-radius:12px;padding:.85rem 1rem;font-size:.88rem;color:rgba(255,255,255,.68);animation:slide-in .35s ease;display:flex;align-items:flex-start;gap:.65rem;line-height:1.55;}
-@keyframes slide-in{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+  #games{padding:5rem 2rem;text-align:center;background:rgba(255,255,255,.015);position:relative;z-index:2;}
+  .games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;max-width:1100px;margin:3rem auto 0;}
+  .game-card{background:rgba(255,255,255,.04);border:1px solid rgba(192,132,252,.2);border-radius:24px;padding:2.2rem 1.5rem;cursor:pointer;display:block;transition:transform .3s,border-color .3s,box-shadow .3s;position:relative;overflow:hidden;}
+  .game-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(192,132,252,.12),transparent 70%);opacity:0;transition:opacity .3s;}
+  .game-card:hover{transform:translateY(-8px) scale(1.02);border-color:rgba(192,132,252,.5);box-shadow:0 20px 60px rgba(192,132,252,.15);}
+  .game-card:hover::after{opacity:1;}
+  .game-emoji{font-size:2.8rem;display:block;margin-bottom:1rem;}
+  .game-name{font-size:1rem;font-weight:600;color:#fff;margin-bottom:.4rem;}
+  .game-desc{font-size:.78rem;color:rgba(255,255,255,.45);}
 
-/* ── MUSIC ── */
-#music{background:rgba(255,255,255,.015);}
-.music-player{
-  max-width:480px;margin:0 auto;
-  background:rgba(255,255,255,.04);border:1px solid rgba(255,107,157,.2);
-  border-radius:24px;overflow:hidden;
-}
-.mp-now{padding:1.5rem 1.5rem 1.1rem;}
-.mp-label{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:.85rem;}
-.mp-header{display:flex;align-items:center;gap:12px;margin-bottom:1.1rem;}
-.mp-art{width:52px;height:52px;border-radius:12px;background:rgba(255,107,157,.15);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;border:1px solid rgba(255,107,157,.2);}
-.mp-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:#fff;line-height:1.2;}
-.mp-artist{font-size:.75rem;color:rgba(255,255,255,.42);margin-top:3px;}
-.mp-progress{margin-bottom:.9rem;}
-.mp-bar-wrap{position:relative;height:4px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer;margin-bottom:.4rem;}
-.mp-bar-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--lavender));border-radius:2px;width:0%;pointer-events:none;}
-.mp-bar-input{position:absolute;inset:-8px 0;opacity:0;cursor:pointer;width:100%;-webkit-appearance:none;appearance:none;}
-.mp-times{display:flex;justify-content:space-between;font-size:.67rem;color:rgba(255,255,255,.28);}
-.mp-controls{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:.85rem;}
-.mp-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;transition:all .15s;min-height:42px;}
-.mp-btn:active{background:rgba(255,107,157,.2);}
-.mp-btn.play{width:54px;height:54px;font-size:1.25rem;background:linear-gradient(135deg,var(--rose),var(--violet));border:none;box-shadow:0 6px 22px rgba(255,75,123,.38);}
-.mp-btn.play:active{transform:scale(.96);}
-.mp-vol{display:flex;align-items:center;gap:8px;padding:0 1.5rem 1.1rem;}
-.mp-vol-icon{font-size:.85rem;color:rgba(255,255,255,.32);}
-.mp-vol-bar{flex:1;height:3px;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer;border:none;}
-.mp-vol-bar::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--pink);cursor:pointer;}
-.mp-tracklist{border-top:1px solid rgba(255,107,157,.1);}
-.mp-track{
-  display:flex;align-items:center;gap:9px;padding:.72rem 1.5rem;
-  cursor:pointer;border:none;background:none;width:100%;text-align:left;
-  transition:background .12s;border-bottom:1px solid rgba(255,255,255,.025);
-  min-height:48px;
-}
-.mp-track:last-child{border-bottom:none;}
-.mp-track:active{background:rgba(255,107,157,.09);}
-.mp-track.active{background:rgba(255,107,157,.1);}
-.mp-track-num{font-size:.7rem;color:rgba(255,255,255,.22);width:16px;text-align:center;flex-shrink:0;}
-.mp-track.active .mp-track-num{display:none;}
-.mp-wave{display:none;gap:2px;align-items:flex-end;height:14px;width:16px;flex-shrink:0;}
-.mp-track.active .mp-wave{display:flex;}
-.mp-wave span{width:3px;background:var(--pink);border-radius:1px;animation:wave .7s ease-in-out infinite;}
-.mp-wave span:nth-child(2){animation-delay:.15s;}
-.mp-wave span:nth-child(3){animation-delay:.3s;}
-.mp-wave.paused span{animation-play-state:paused;}
-@keyframes wave{0%,100%{height:4px;}50%{height:12px;}}
-.mp-track-emoji{font-size:1rem;flex-shrink:0;}
-.mp-track-info2{flex:1;min-width:0;}
-.mp-track-name{font-size:.85rem;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.mp-track-artist{font-size:.7rem;color:rgba(255,255,255,.38);}
-.mp-track-dur{font-size:.68rem;color:rgba(255,255,255,.25);flex-shrink:0;}
+  #memories{padding:5rem 2rem;max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:2;}
+  .memory-input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,107,157,.2);border-radius:16px;padding:1.2rem 1.5rem;color:#fff;font-size:.95rem;font-family:'Inter',sans-serif;resize:none;outline:none;transition:border-color .3s;}
+  .memory-input:focus{border-color:rgba(255,107,157,.5);}
+  .memory-input::placeholder{color:rgba(255,255,255,.3);}
+  .memories-list{display:flex;flex-direction:column;gap:1rem;text-align:left;max-height:380px;overflow-y:auto;padding-right:.5rem;margin-top:2rem;}
+  .memories-list::-webkit-scrollbar{width:4px;}
+  .memories-list::-webkit-scrollbar-thumb{background:rgba(255,107,157,.3);border-radius:2px;}
+  .memory-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,107,157,.1);border-radius:12px;padding:1rem 1.25rem;font-size:.9rem;color:rgba(255,255,255,.7);animation:slide-in .4s ease;display:flex;align-items:flex-start;gap:.75rem;}
+  @keyframes slide-in{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
 
-/* ── WISH WALL ── */
-.wish-wall{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;max-width:560px;margin:0 auto;}
-.wish-bubble{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:1.1rem;font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.58;cursor:pointer;transition:transform .2s,border-color .2s;text-align:left;}
-.wish-bubble:active{transform:scale(.98);border-color:rgba(255,107,157,.22);}
-.wish-from{font-size:.72rem;color:var(--pink);margin-top:.65rem;font-weight:500;}
+  /* ===== MUSIC PLAYER ===== */
+  #music{padding:5rem 2rem;text-align:center;background:rgba(255,255,255,.015);position:relative;z-index:2;}
 
-/* ── LETTER ── */
-#letter{background:rgba(255,255,255,.015);}
-.letter-card{
-  max-width:600px;margin:0 auto;
-  background:rgba(255,255,255,.03);border:1px solid rgba(255,107,157,.15);
-  border-radius:24px;padding:2rem 1.5rem;position:relative;overflow:hidden;
-}
-.letter-card::before{content:'❝';position:absolute;top:-.5rem;left:1.25rem;font-size:6rem;color:rgba(255,107,157,.07);font-family:Georgia,serif;line-height:1;pointer-events:none;}
-.letter-body{font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:rgba(255,255,255,.73);line-height:1.95;position:relative;z-index:1;}
-.letter-sig{margin-top:1.75rem;font-family:'Dancing Script',cursive;font-size:1.65rem;color:var(--pink);position:relative;z-index:1;}
+  .music-player{
+    max-width:520px;margin:2.5rem auto 0;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,107,157,.2);
+    border-radius:28px;overflow:hidden;
+    backdrop-filter:blur(20px);
+  }
 
-/* ── FOOTER ── */
-footer{
-  padding:2.5rem 1.25rem;text-align:center;
-  border-top:1px solid rgba(255,255,255,.05);position:relative;z-index:2;
-  padding-bottom:calc(2.5rem + env(safe-area-inset-bottom));
-}
-.footer-heart{font-size:1.4rem;animation:heartbeat 1.5s ease-in-out infinite;display:inline-block;}
-@keyframes heartbeat{0%,100%{transform:scale(1);}50%{transform:scale(1.22);}}
-footer p{color:rgba(255,255,255,.28);font-size:.82rem;margin-top:.65rem;}
+  .mp-now{padding:1.75rem 1.75rem 1.25rem;}
+  .mp-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1rem;}
+  .mp-track-info{display:flex;align-items:center;gap:14px;margin-bottom:1.25rem;}
+  .mp-art{width:56px;height:56px;border-radius:14px;background:rgba(255,107,157,.15);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;border:1px solid rgba(255,107,157,.2);}
+  .mp-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff;line-height:1.2;text-align:left;}
+  .mp-artist{font-size:.78rem;color:rgba(255,255,255,.45);margin-top:3px;text-align:left;}
 
-/* ── MODAL ── */
-.modal-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.88);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  z-index:200;display:flex;align-items:flex-end;justify-content:center;
-  padding:0;opacity:0;pointer-events:none;transition:opacity .25s;
-}
-.modal-overlay.active{opacity:1;pointer-events:all;}
-.modal{
-  background:#180E22;border:1px solid rgba(192,132,252,.2);
-  border-radius:24px 24px 0 0;
-  padding:1.5rem 1.25rem calc(1.75rem + env(safe-area-inset-bottom));
-  width:100%;max-height:88svh;overflow-y:auto;
-  position:relative;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1);
-}
-.modal-overlay.active .modal{transform:translateY(0);}
-.modal-handle{width:40px;height:4px;background:rgba(255,255,255,.18);border-radius:2px;margin:0 auto 1.25rem;}
-.modal-close{
-  position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.08);
-  border:none;color:#fff;width:34px;height:34px;border-radius:50%;
-  cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;
-}
-.modal-close:active{background:rgba(255,107,157,.3);}
-.modal-title{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;margin-bottom:1.25rem;text-align:center;}
+  /* progress */
+  .mp-progress{margin-bottom:1rem;}
+  .mp-bar-wrap{position:relative;height:4px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer;margin-bottom:.4rem;}
+  .mp-bar-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--lavender));border-radius:2px;width:0%;pointer-events:none;}
+  .mp-bar-input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;margin:0;-webkit-appearance:none;appearance:none;}
+  .mp-times{display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.3);}
 
-/* ── QUIZ / MATCH ── */
-.quiz-q{font-size:.95rem;color:rgba(255,255,255,.83);margin-bottom:1.35rem;line-height:1.6;text-align:center;}
-.quiz-options{display:flex;flex-direction:column;gap:.6rem;}
-.quiz-opt{padding:.9rem 1rem;background:rgba(255,255,255,.04);border:1px solid rgba(192,132,252,.2);border-radius:12px;cursor:pointer;font-size:.88rem;color:rgba(255,255,255,.78);transition:all .15s;text-align:center;font-family:'Inter',sans-serif;min-height:48px;}
-.quiz-opt:active{background:rgba(192,132,252,.15);}
-.quiz-opt.correct{background:rgba(52,211,153,.15);border-color:#34D399;color:#6EE7B7;}
-.quiz-opt.wrong{background:rgba(239,68,68,.15);border-color:#EF4444;color:#FCA5A5;}
-.match-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;}
-.match-card{aspect-ratio:1;background:rgba(255,255,255,.05);border:1px solid rgba(192,132,252,.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;cursor:pointer;user-select:none;transition:transform .25s,background .25s;min-height:60px;}
-.match-card.face-down{font-size:0;background:rgba(192,132,252,.1);}
-.match-card.matched{background:rgba(52,211,153,.12);border-color:#34D399;pointer-events:none;}
-.match-card:active:not(.matched){transform:scale(1.05);}
+  /* controls */
+  .mp-controls{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1rem;}
+  .mp-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s;}
+  .mp-btn:hover{background:rgba(255,107,157,.2);border-color:rgba(255,107,157,.4);}
+  .mp-btn.play{width:50px;height:50px;font-size:1.2rem;background:linear-gradient(135deg,var(--rose),var(--violet));border:none;box-shadow:0 6px 24px rgba(255,75,123,.4);}
+  .mp-btn.play:hover{transform:scale(1.06);box-shadow:0 10px 30px rgba(255,75,123,.5);}
 
-/* ── SPINNER ── */
-.spinner-wrap{position:relative;width:min(260px,70vw);height:min(260px,70vw);margin:0 auto 1.25rem;}
-#wheel{width:100%;height:100%;border-radius:50%;border:3px solid rgba(255,107,157,.3);transform-origin:center;cursor:pointer;box-shadow:0 0 32px rgba(255,107,157,.18);}
-.spinner-pin{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:1.35rem;z-index:2;}
+  /* volume */
+  .mp-vol{display:flex;align-items:center;gap:8px;padding:0 1.75rem 1.25rem;}
+  .mp-vol-icon{font-size:.9rem;color:rgba(255,255,255,.35);}
+  .mp-vol-bar{flex:1;height:3px;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer;border:none;}
+  .mp-vol-bar::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--pink);cursor:pointer;border:none;}
 
-/* ── POEM ── */
-.poem-section{margin-bottom:1rem;}
-.poem-label{font-size:.7rem;color:rgba(255,255,255,.32);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.4rem;}
-.poem-picks{display:flex;flex-wrap:wrap;gap:.4rem;}
-.poem-pick{
-  background:rgba(255,107,157,.1);border:1px solid rgba(255,107,157,.28);border-radius:100px;
-  padding:.3rem .85rem;font-size:.8rem;color:var(--blush);cursor:pointer;
-  transition:all .15s;user-select:none;min-height:36px;display:inline-flex;align-items:center;
-}
-.poem-pick:active,.poem-pick.selected{background:rgba(255,107,157,.25);border-color:var(--pink);color:#fff;}
-.poem-output{background:rgba(255,255,255,.03);border:1px solid rgba(255,107,157,.15);border-radius:14px;padding:1.1rem;font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:rgba(255,255,255,.78);line-height:1.85;min-height:72px;text-align:center;margin-top:.85rem;}
+  /* tracklist */
+  .mp-tracklist{border-top:1px solid rgba(255,107,157,.1);}
+  .mp-track{display:flex;align-items:center;gap:10px;padding:.7rem 1.75rem;cursor:pointer;border:none;background:none;width:100%;text-align:left;transition:background .15s;border-bottom:1px solid rgba(255,255,255,.03);}
+  .mp-track:last-child{border-bottom:none;}
+  .mp-track:hover{background:rgba(255,107,157,.06);}
+  .mp-track.active{background:rgba(255,107,157,.1);}
+  .mp-track-num{font-size:.72rem;color:rgba(255,255,255,.25);width:18px;text-align:center;flex-shrink:0;}
+  .mp-track.active .mp-track-num{display:none;}
+  .mp-wave{display:none;gap:2px;align-items:flex-end;height:14px;width:18px;flex-shrink:0;}
+  .mp-track.active .mp-wave{display:flex;}
+  .mp-wave span{width:3px;background:var(--pink);border-radius:1px;animation:wave .7s ease-in-out infinite;}
+  .mp-wave span:nth-child(2){animation-delay:.15s;}
+  .mp-wave span:nth-child(3){animation-delay:.3s;}
+  .mp-wave.paused span{animation-play-state:paused;}
+  @keyframes wave{0%,100%{height:4px;}50%{height:12px;}}
+  .mp-track-emoji{font-size:1.1rem;flex-shrink:0;}
+  .mp-track-info{flex:1;min-width:0;}
+  .mp-track-name{font-size:.88rem;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .mp-track-artist{font-size:.72rem;color:rgba(255,255,255,.4);text-align:left;}
+  .mp-track-dur{font-size:.72rem;color:rgba(255,255,255,.28);flex-shrink:0;}
 
-/* ── DOODLE ── */
-#doodle-canvas{width:100%;border-radius:14px;border:1px solid rgba(255,107,157,.2);cursor:crosshair;background:#0a0614;display:block;touch-action:none;max-height:280px;}
-.doodle-tools{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.65rem;justify-content:center;align-items:center;}
-.doodle-color{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .15s,border-color .15s;flex-shrink:0;}
-.doodle-color:active,.doodle-color.active{transform:scale(1.2);border-color:#fff;}
-.doodle-size{background:none;border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:100px;padding:.3rem .75rem;font-size:.75rem;cursor:pointer;transition:border-color .15s;font-family:'Inter',sans-serif;min-height:34px;}
-.doodle-size.active,.doodle-size:active{border-color:var(--pink);color:var(--pink);}
+  #wishes{padding:5rem 2rem;max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:2;}
+  .wish-wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:3rem;}
+  .wish-bubble{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.25rem;font-size:.85rem;color:rgba(255,255,255,.65);line-height:1.6;cursor:pointer;transition:transform .3s,border-color .3s;text-align:left;}
+  .wish-bubble:hover{transform:scale(1.03);border-color:rgba(255,107,157,.25);}
+  .wish-from{font-size:.75rem;color:var(--pink);margin-top:.75rem;font-weight:500;}
 
-/* ── CONFETTI & HEARTS ── */
-.confetti-piece{position:fixed;width:9px;height:9px;opacity:0;pointer-events:none;z-index:999;border-radius:2px;animation:confetti-fall 3s ease forwards;}
-@keyframes confetti-fall{0%{opacity:1;transform:translateY(-20px) rotate(0deg);}100%{opacity:0;transform:translateY(100vh) rotate(720deg);}}
-.float-heart{position:fixed;pointer-events:none;z-index:999;animation:float-heart 1.8s ease forwards;}
-@keyframes float-heart{0%{opacity:1;transform:translateY(0) scale(.4);}100%{opacity:0;transform:translateY(-100px) scale(1.4);}}
+  #letter{padding:5rem 2rem;text-align:center;background:rgba(255,255,255,.015);position:relative;z-index:2;}
+  .letter-card{max-width:680px;margin:3rem auto 0;background:rgba(255,255,255,.03);border:1px solid rgba(255,107,157,.15);border-radius:28px;padding:3rem;text-align:left;position:relative;overflow:hidden;}
+  .letter-card::before{content:'❝';position:absolute;top:-.5rem;left:1.5rem;font-size:8rem;color:rgba(255,107,157,.08);font-family:Georgia,serif;line-height:1;}
+  .letter-body{font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:rgba(255,255,255,.75);line-height:2;position:relative;z-index:1;}
+  .letter-sig{margin-top:2rem;font-family:'Dancing Script',cursive;font-size:1.8rem;color:var(--pink);position:relative;z-index:1;}
 
-/* ── SCROLL REVEAL ── */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
+  footer{padding:3rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255,.05);position:relative;z-index:2;}
+  .footer-heart{font-size:1.5rem;animation:heartbeat 1.5s ease-in-out infinite;display:inline-block;}
+  @keyframes heartbeat{0%,100%{transform:scale(1);}50%{transform:scale(1.25);}}
+  footer p{color:rgba(255,255,255,.3);font-size:.85rem;margin-top:.75rem;}
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-thumb{background:rgba(255,107,157,.18);border-radius:2px;}
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(20px);z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .3s;}
+  .modal-overlay.active{opacity:1;pointer-events:all;}
+  .modal{background:#180E22;border:1px solid rgba(192,132,252,.2);border-radius:28px;padding:2rem;width:100%;max-width:540px;max-height:85vh;overflow-y:auto;position:relative;transform:scale(.9);transition:transform .3s;}
+  .modal-overlay.active .modal{transform:scale(1);}
+  .modal-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.08);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+  .modal-close:hover{background:rgba(255,107,157,.3);}
+  .modal-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;text-align:center;}
 
-/* ── DESKTOP ENHANCEMENTS ── */
-@media(min-width:640px){
-  nav{padding:1rem 2rem;}
-  .nav-scroll{gap:.75rem;}
-  .nav-scroll a{font-size:.77rem;}
-  #hero{padding:6rem 2rem 4rem;}
-  .hero-cta{flex-direction:row;width:auto;}
-  .section{padding:5rem 2rem;}
-  .countdown-grid{gap:1.25rem;}
-  .notes-grid{grid-template-columns:1fr 1fr;}
-  .games-grid{grid-template-columns:repeat(3,1fr);max-width:700px;}
-  .wish-wall{grid-template-columns:repeat(3,1fr);max-width:800px;}
-  .modal{border-radius:24px;max-width:520px;max-height:85svh;align-self:center;margin:0 auto;}
-  .modal-overlay{align-items:center;padding:1.5rem;}
-  .modal-handle{display:none;}
-  .match-card{min-height:72px;font-size:1.6rem;}
-}
-@media(min-width:900px){
-  .notes-grid{grid-template-columns:repeat(3,1fr);}
-  .games-grid{grid-template-columns:repeat(5,1fr);max-width:900px;}
-}
+  .quiz-q{font-size:1rem;color:rgba(255,255,255,.85);margin-bottom:1.5rem;line-height:1.6;text-align:center;}
+  .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+  .quiz-opt{padding:.85rem;background:rgba(255,255,255,.04);border:1px solid rgba(192,132,252,.2);border-radius:12px;cursor:pointer;font-size:.85rem;color:rgba(255,255,255,.8);transition:all .2s;text-align:center;font-family:'Inter',sans-serif;}
+  .quiz-opt:hover{background:rgba(192,132,252,.15);border-color:var(--lavender);}
+  .quiz-opt.correct{background:rgba(52,211,153,.15);border-color:#34D399;color:#6EE7B7;}
+  .quiz-opt.wrong{background:rgba(239,68,68,.15);border-color:#EF4444;color:#FCA5A5;}
+
+  .match-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;}
+  .match-card{aspect-ratio:1;background:rgba(255,255,255,.05);border:1px solid rgba(192,132,252,.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;cursor:pointer;user-select:none;transition:transform .3s,background .3s;}
+  .match-card.face-down{font-size:0;background:rgba(192,132,252,.1);}
+  .match-card.matched{background:rgba(52,211,153,.12);border-color:#34D399;pointer-events:none;}
+  .match-card:hover:not(.matched){transform:scale(1.06);}
+
+  .spinner-wrap{position:relative;width:280px;height:280px;margin:0 auto 1.5rem;}
+  #wheel{width:100%;height:100%;border-radius:50%;border:4px solid rgba(255,107,157,.3);transform-origin:center;cursor:pointer;box-shadow:0 0 40px rgba(255,107,157,.2);}
+  .spinner-pin{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:1.5rem;z-index:2;}
+
+  .poem-parts{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1rem;}
+  .poem-line{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;}
+  .poem-static{font-family:'Playfair Display',serif;font-style:italic;color:rgba(255,255,255,.55);font-size:.9rem;}
+  .poem-pick{background:rgba(255,107,157,.12);border:1px solid rgba(255,107,157,.3);border-radius:100px;padding:.25rem .85rem;font-size:.82rem;color:var(--blush);cursor:pointer;transition:all .2s;user-select:none;}
+  .poem-pick:hover,.poem-pick.selected{background:rgba(255,107,157,.25);border-color:var(--pink);color:#fff;}
+  .poem-output{background:rgba(255,255,255,.03);border:1px solid rgba(255,107,157,.15);border-radius:16px;padding:1.25rem;font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:rgba(255,255,255,.8);line-height:1.9;min-height:80px;text-align:center;margin-top:1rem;}
+
+  #doodle-canvas{width:100%;border-radius:16px;border:1px solid rgba(255,107,157,.2);cursor:crosshair;background:#0a0614;display:block;touch-action:none;}
+  .doodle-tools{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.75rem;justify-content:center;}
+  .doodle-color{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .2s,border-color .2s;}
+  .doodle-color:hover,.doodle-color.active{transform:scale(1.25);border-color:#fff;}
+  .doodle-size{background:none;border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:100px;padding:.25rem .75rem;font-size:.78rem;cursor:pointer;transition:border-color .2s;font-family:'Inter',sans-serif;}
+  .doodle-size.active,.doodle-size:hover{border-color:var(--pink);color:var(--pink);}
+
+  .confetti-piece{position:fixed;width:10px;height:10px;opacity:0;pointer-events:none;z-index:999;border-radius:2px;animation:confetti-fall 3s ease forwards;}
+  @keyframes confetti-fall{0%{opacity:1;transform:translateY(-20px) rotate(0deg);}100%{opacity:0;transform:translateY(100vh) rotate(720deg);}}
+
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  .float-heart{position:fixed;pointer-events:none;z-index:999;animation:float-heart 2s ease forwards;}
+  @keyframes float-heart{0%{opacity:1;transform:translateY(0) scale(.5);}100%{opacity:0;transform:translateY(-110px) scale(1.5);}}
+
+  ::-webkit-scrollbar{width:5px;}
+  ::-webkit-scrollbar-thumb{background:rgba(255,107,157,.2);border-radius:3px;}
+
+  @media(max-width:768px){
+    nav{padding:.85rem 1.25rem;}
+    .nav-links{gap:.85rem;}
+    .nav-links a{font-size:.72rem;}
+    .countdown-num{font-size:2.5rem;}
+    .countdown-card{padding:1rem 1.25rem;min-width:85px;}
+    .quiz-options{grid-template-columns:1fr;}
+    .letter-card{padding:2rem 1.5rem;}
+    .games-grid{grid-template-columns:repeat(3,1fr);}
+    .music-player{margin:2rem 0 0;}
+    #constell-interactive{height:280px;}
+  }
+  @media(max-width:520px){
+    nav{display:flex;}
+    .nav-links{display:none;}
+    .games-grid{grid-template-columns:repeat(2,1fr);}
+    .poem-line{justify-content:center;}
+    .mp-now{padding:1.25rem 1.25rem .85rem;}
+    .mp-track{padding:.7rem 1.25rem;}
+    .mp-vol{padding:0 1.25rem 1rem;}
+  }
 </style>
 </head>
 <body>
 
 <div id="vis-slider-wrap">
-  <span id="vis-icon">🌟</span>
+  <span id="vis-icon">✨</span>
   <label>Magic</label>
   <input type="range" id="vis-slider" min="0" max="100" value="70">
 </div>
@@ -352,13 +303,13 @@ footer p{color:rgba(255,255,255,.28);font-size:.82rem;margin-top:.65rem;}
 
 <nav>
   <div class="nav-logo">Christa ✨</div>
-  <div class="nav-scroll">
-    <a href="#countdown">⏱</a>
-    <a href="#constellation-section">🌌</a>
-    <a href="#notes">💌</a>
-    <a href="#games">🎮</a>
-    <a href="#music">🎵</a>
-    <a href="#letter">💝</a>
+  <div class="nav-links">
+    <a href="#countdown">Countdown</a>
+    <a href="#constellation-section">Stars</a>
+    <a href="#notes">For You</a>
+    <a href="#games">Games</a>
+    <a href="#music">Vibes</a>
+    <a href="#letter">Letter</a>
   </div>
 </nav>
 
@@ -373,39 +324,39 @@ footer p{color:rgba(255,255,255,.28);font-size:.82rem;margin-top:.65rem;}
   <div class="hero-date">June 16, 2005 · Turning 20 🎂</div>
   <div class="hero-cta">
     <a href="#games" class="btn btn-primary">🎮 Play Games</a>
-    <a href="#notes" class="btn btn-ghost">💌 Open Gifts</a>
+    <a href="#notes" class="btn btn-ghost">💌 Open Your Gifts</a>
   </div>
 </section>
 
-<section id="countdown" class="section reveal">
+<section id="countdown" class="reveal">
   <p class="section-label">🎊 The big moment</p>
   <h2 class="section-title">Counting Down to You</h2>
   <div class="countdown-grid">
     <div class="countdown-card"><div class="countdown-num" id="cd-days">00</div><div class="countdown-lbl">Days</div></div>
     <div class="countdown-card"><div class="countdown-num" id="cd-hours">00</div><div class="countdown-lbl">Hours</div></div>
-    <div class="countdown-card"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-lbl">Mins</div></div>
-    <div class="countdown-card"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-lbl">Secs</div></div>
+    <div class="countdown-card"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-lbl">Minutes</div></div>
+    <div class="countdown-card"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-lbl">Seconds</div></div>
   </div>
   <div class="birthday-msg" id="bday-msg">🎉 IT'S YOUR BIRTHDAY, CHRISTA! 🎉</div>
 </section>
 
-<section id="constellation-section" class="section reveal">
+<section id="constellation-section" class="reveal">
   <p class="section-label">🌌 Your own sky</p>
-  <h2 class="section-title">Draw Christa's Constellation</h2>
+  <h2 class="section-title">Draw a constellation for Christa</h2>
   <canvas id="constell-interactive"></canvas>
-  <p class="constell-hint">Tap to place stars · They connect automatically · Double-tap to name yours ✨</p>
-  <div class="constell-btns">
-    <button class="btn btn-ghost" onclick="clearConstellation()">🗑 Clear</button>
-    <button class="btn btn-ghost" onclick="loadPreset('heart')">💕 Heart</button>
-    <button class="btn btn-ghost" onclick="loadPreset('flower')">🌸 Flower</button>
-    <button class="btn btn-ghost" onclick="loadPreset('gemini')">♊ Gemini</button>
-    <button class="btn btn-primary" onclick="saveConstellation()">📸 Save</button>
+  <p class="constell-hint">Click to place stars · They connect automatically · Double-click to name your constellation ✨</p>
+  <div style="display:flex;gap:.75rem;justify-content:center;margin-top:1rem;flex-wrap:wrap;">
+    <button class="btn btn-ghost" onclick="clearConstellation()" style="font-size:.82rem;padding:.6rem 1.2rem">🗑 Clear</button>
+    <button class="btn btn-ghost" onclick="loadPreset('heart')" style="font-size:.82rem;padding:.6rem 1.2rem">💕 Heart</button>
+    <button class="btn btn-ghost" onclick="loadPreset('flower')" style="font-size:.82rem;padding:.6rem 1.2rem">🌸 Flower</button>
+    <button class="btn btn-ghost" onclick="loadPreset('gemini')" style="font-size:.82rem;padding:.6rem 1.2rem">♊ Gemini</button>
+    <button class="btn btn-primary" onclick="saveConstellation()" style="font-size:.82rem;padding:.6rem 1.2rem">📸 Save</button>
   </div>
 </section>
 
-<section id="notes" class="section reveal">
-  <p class="section-label">💝 Little gifts</p>
-  <h2 class="section-title">Things you deserve to know</h2>
+<section id="notes" class="reveal">
+  <p class="section-label" style="text-align:center">💝 Little gifts</p>
+  <h2 class="section-title" style="text-align:center">Things you deserve to know</h2>
   <div class="notes-grid">
     <div class="note-card" onclick="spawnHearts(event)"><div class="note-icon">🌸</div><div class="note-title">You light up every room</div><div class="note-body">There's something about the way you walk in — the whole energy shifts. People feel it, even if they can't name it. That's a rare kind of magic.</div></div>
     <div class="note-card" onclick="spawnHearts(event)"><div class="note-icon">💫</div><div class="note-title">Your laugh is someone's favourite sound</div><div class="note-body">Unfiltered, real, contagious. The kind that makes strangers look over and smile without even knowing why.</div></div>
@@ -416,68 +367,76 @@ footer p{color:rgba(255,255,255,.28);font-size:.82rem;margin-top:.65rem;}
   </div>
 </section>
 
-<section id="games" class="section reveal">
+<section id="games" class="reveal">
   <p class="section-label">🎮 Christa's Arcade</p>
   <h2 class="section-title">Play with me 🩷</h2>
   <div class="games-grid">
     <div class="game-card" onclick="openGame('memory')"><span class="game-emoji">🃏</span><div class="game-name">Memory Match</div><div class="game-desc">Find all the pairs!</div></div>
-    <div class="game-card" onclick="openGame('spinner')"><span class="game-emoji">🌀</span><div class="game-name">Wish Spinner</div><div class="game-desc">Spin for a wish</div></div>
-    <div class="game-card" onclick="openGame('truth')"><span class="game-emoji">🌸</span><div class="game-name">Birthday Truths</div><div class="game-desc">Sweet affirmations</div></div>
-    <div class="game-card" onclick="openGame('poem')"><span class="game-emoji">✍️</span><div class="game-name">Poem Builder</div><div class="game-desc">Craft your poem</div></div>
-    <div class="game-card" onclick="openGame('doodle')"><span class="game-emoji">🎨</span><div class="game-name">Birthday Doodle</div><div class="game-desc">Draw for Christa!</div></div>
+    <div class="game-card" onclick="openGame('spinner')"><span class="game-emoji">🌀</span><div class="game-name">Wish Spinner</div><div class="game-desc">Spin for a birthday wish</div></div>
+    <div class="game-card" onclick="openGame('truth')"><span class="game-emoji">🌸</span><div class="game-name">Birthday Truths</div><div class="game-desc">Sweet affirmations for you</div></div>
+    <div class="game-card" onclick="openGame('poem')"><span class="game-emoji">✍️</span><div class="game-name">Poem Builder</div><div class="game-desc">Craft your birthday poem</div></div>
+    <div class="game-card" onclick="openGame('doodle')"><span class="game-emoji">🎨</span><div class="game-name">Birthday Doodle</div><div class="game-desc">Draw something for Christa!</div></div>
   </div>
 </section>
 
-<section id="memories" class="section reveal">
+<section id="memories" class="reveal">
   <p class="section-label">🫙 Memory jar</p>
   <h2 class="section-title">Drop a birthday wish</h2>
-  <p style="color:rgba(255,255,255,.42);font-size:.88rem;text-align:center;margin-bottom:1.5rem;">Write something sweet for Christa — a memory, a wish, or just love ✨</p>
-  <div style="max-width:520px;margin:0 auto;">
-    <textarea class="memory-input" id="memInput" rows="3" placeholder="Happy birthday Christa! I hope this year..."></textarea>
-    <div style="margin-top:.85rem"><button class="btn btn-primary" onclick="addMemory()" style="width:100%">🌸 Add to the jar</button></div>
+  <p style="color:rgba(255,255,255,.45);font-size:.9rem;">Write something sweet for Christa — a memory, a wish, or just love ✨</p>
+  <div style="margin:2rem auto;max-width:600px;">
+    <textarea class="memory-input" id="memInput" rows="3" placeholder="Happy birthday Christa! I hope this year…"></textarea>
+    <div style="margin-top:1rem"><button class="btn btn-primary" onclick="addMemory()" style="width:100%">🌸 Add to the jar</button></div>
   </div>
-  <div class="memories-list" id="memoriesList" style="max-width:520px;margin:0 auto;">
+  <div class="memories-list" id="memoriesList">
     <div class="memory-item"><span>🌸</span><span>Happy birthday Christa! May 20 be the year you bloom the most. You deserve every beautiful thing life is preparing for you. 💕</span></div>
     <div class="memory-item"><span>✨</span><span>The world is genuinely a better place because you're in it. Never forget that. Here's to an incredible year!</span></div>
   </div>
 </section>
 
-<section id="music" class="section reveal">
+<section id="music" class="reveal">
   <p class="section-label">🎵 Birthday Playlist</p>
   <h2 class="section-title">Songs that feel like you</h2>
+
   <div class="music-player">
     <div class="mp-now">
       <div class="mp-label">Now playing</div>
-      <div class="mp-header">
+      <div class="mp-track-info">
         <div class="mp-art" id="mpArt">🎵</div>
         <div>
           <div class="mp-title" id="mpTitle">Pick a song below</div>
           <div class="mp-artist" id="mpArtist">tap any track to start</div>
         </div>
       </div>
+
       <div class="mp-progress">
         <div class="mp-bar-wrap" id="mpBarWrap">
           <div class="mp-bar-fill" id="mpBarFill"></div>
           <input type="range" class="mp-bar-input" id="mpBarInput" min="0" max="100" value="0" step="0.1">
         </div>
-        <div class="mp-times"><span id="mpCur">0:00</span><span id="mpDur">0:00</span></div>
+        <div class="mp-times">
+          <span id="mpCur">0:00</span>
+          <span id="mpDur">0:00</span>
+        </div>
       </div>
+
       <div class="mp-controls">
-        <button class="mp-btn" onclick="mpPrev()" aria-label="Previous">⏮</button>
-        <button class="mp-btn play" id="mpPlayBtn" onclick="mpToggle()" aria-label="Play">▶</button>
-        <button class="mp-btn" onclick="mpNext()" aria-label="Next">⏭</button>
+        <button class="mp-btn" onclick="mpPrev()" title="Previous">⏮</button>
+        <button class="mp-btn play" id="mpPlayBtn" onclick="mpToggle()" title="Play / Pause">▶</button>
+        <button class="mp-btn" onclick="mpNext()" title="Next">⏭</button>
       </div>
     </div>
+
     <div class="mp-vol">
       <span class="mp-vol-icon">🔈</span>
-      <input type="range" class="mp-vol-bar" id="mpVol" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+      <input type="range" class="mp-vol-bar" id="mpVol" min="0" max="1" step="0.01" value="0.8">
       <span class="mp-vol-icon">🔊</span>
     </div>
+
     <div class="mp-tracklist" id="mpTracklist"></div>
   </div>
 </section>
 
-<section id="wishes" class="section reveal">
+<section id="wishes" class="reveal">
   <p class="section-label">💬 Wish wall</p>
   <h2 class="section-title">Everyone's rooting for you</h2>
   <div class="wish-wall">
@@ -485,12 +444,12 @@ footer p{color:rgba(255,255,255,.28);font-size:.82rem;margin-top:.65rem;}
     <div class="wish-bubble">"You were born to do great things. This is just year one of the best decade of your life."<div class="wish-from">— The universe 🌌</div></div>
     <div class="wish-bubble">"Here's to coffee, chaos, and a whole lot of beautiful memories waiting to happen."<div class="wish-from">— Your future self 🌸</div></div>
     <div class="wish-bubble">"20 looks incredible on you. And 30 is going to be even better."<div class="wish-from">— Time itself ⌛</div></div>
-    <div class="wish-bubble">"Keep being the kind of person who makes rooms brighter just by entering them."<div class="wish-from">— Every room 💡</div></div>
+    <div class="wish-bubble">"Keep being the kind of person who makes rooms brighter just by entering them."<div class="wish-from">— Every room you've been in 💡</div></div>
     <div class="wish-bubble">"You've survived 20 years of plot twists. Here's to a chapter that's all yours."<div class="wish-from">— Your story 📖</div></div>
   </div>
 </section>
 
-<section id="letter" class="section reveal">
+<section id="letter" class="reveal">
   <p class="section-label">💌 For you</p>
   <h2 class="section-title">A letter from the heart</h2>
   <div class="letter-card">
@@ -509,299 +468,445 @@ footer p{color:rgba(255,255,255,.28);font-size:.82rem;margin-top:.65rem;}
 <footer>
   <div class="footer-heart">❤️</div>
   <p>Made with infinite love for Christa 🌸 June 16, 2005 · Forever cherished</p>
-  <p style="margin-top:.4rem;font-size:.73rem">Tap the cards · Play the games · Draw the stars · Feel the love ✨</p>
+  <p style="margin-top:.5rem;font-size:.75rem">Tap the cards · Play the games · Draw the stars · Feel the love ✨</p>
 </footer>
 
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
   <div class="modal" id="modalBox">
-    <div class="modal-handle"></div>
-    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    <button class="modal-close" onclick="closeModal()">✕</button>
     <div id="modalContent"></div>
   </div>
 </div>
 
 <script>
-// ── VISUAL INTENSITY SLIDER ──
-const visSlider=document.getElementById('vis-slider');
-const visIcon=document.getElementById('vis-icon');
-let intensity=0.7;
-visSlider.addEventListener('input',function(){
-  intensity=this.value/100;
-  visIcon.textContent=intensity<.2?'😶':intensity<.4?'🌙':intensity<.6?'✨':intensity<.85?'🌟':'💫';
-  document.getElementById('constellation-canvas').style.opacity=0.3+intensity*0.7;
+// ============================================================
+//  VISUAL INTENSITY SLIDER
+// ============================================================
+const visSlider = document.getElementById('vis-slider');
+const visIcon   = document.getElementById('vis-icon');
+let intensity   = 0.7;
+
+visSlider.addEventListener('input', function(){
+  intensity = this.value / 100;
+  visIcon.textContent = intensity < .2 ? '😶' : intensity < .4 ? '🌙' : intensity < .6 ? '✨' : intensity < .85 ? '🌟' : '💫';
+  document.getElementById('constellation-canvas').style.opacity = 0.3 + intensity * 0.7;
   updateParticleIntensity();
-  document.querySelectorAll('.hero-glow').forEach(g=>g.style.opacity=intensity);
+  document.querySelectorAll('.hero-glow').forEach(g => g.style.opacity = intensity);
 });
 
-// ── BACKGROUND STAR CANVAS ──
-const bgCanvas=document.getElementById('constellation-canvas');
-const bgCtx=bgCanvas.getContext('2d');
-let bgStars=[];
-function resizeBgCanvas(){bgCanvas.width=window.innerWidth;bgCanvas.height=window.innerHeight;}
-resizeBgCanvas();
-window.addEventListener('resize',resizeBgCanvas);
-for(let i=0;i<180;i++){
-  bgStars.push({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,r:Math.random()*1.6+.3,vx:(Math.random()-.5)*.1,vy:(Math.random()-.5)*.1,alpha:Math.random(),pulse:Math.random()*Math.PI*2,color:['#FF6B9D','#C084FC','#FBBF24','#fff','#FFB3CC','#A5F3FC'][Math.floor(Math.random()*6)]});
+// ============================================================
+//  BACKGROUND STAR CANVAS
+// ============================================================
+const bgCanvas = document.getElementById('constellation-canvas');
+const bgCtx    = bgCanvas.getContext('2d');
+let bgStars    = [];
+
+function resizeBgCanvas(){
+  bgCanvas.width  = window.innerWidth;
+  bgCanvas.height = window.innerHeight;
 }
-function hexToRgba(hex,a){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return `rgba(${r},${g},${b},${a})`;}
-function animateBg(){
-  bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height);
-  const connDist=100+intensity*80,starAlpha=0.45+intensity*0.55;
-  bgStars.forEach(s=>{
-    s.x+=s.vx;s.y+=s.vy;s.pulse+=.01;
-    if(s.x<0)s.x=bgCanvas.width;if(s.x>bgCanvas.width)s.x=0;
-    if(s.y<0)s.y=bgCanvas.height;if(s.y>bgCanvas.height)s.y=0;
-    const a=(Math.sin(s.pulse)*.4+.6)*starAlpha;
-    bgCtx.beginPath();bgCtx.arc(s.x,s.y,s.r*(1+intensity*.4),0,Math.PI*2);
-    bgCtx.fillStyle=hexToRgba(s.color.startsWith('#')?s.color:'#ffffff',a);bgCtx.fill();
+resizeBgCanvas();
+window.addEventListener('resize', resizeBgCanvas);
+
+for(let i = 0; i < 200; i++){
+  bgStars.push({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    r: Math.random() * 1.8 + .3,
+    vx: (Math.random() - .5) * .12,
+    vy: (Math.random() - .5) * .12,
+    alpha: Math.random(),
+    pulse: Math.random() * Math.PI * 2,
+    color: ['#FF6B9D','#C084FC','#FBBF24','#fff','#FFB3CC','#A5F3FC'][Math.floor(Math.random()*6)]
   });
-  const lineAlpha=intensity*0.22;
-  if(lineAlpha>.02){
-    for(let i=0;i<bgStars.length;i++)for(let j=i+1;j<bgStars.length;j++){
-      const dx=bgStars[i].x-bgStars[j].x,dy=bgStars[i].y-bgStars[j].y;
-      const d=Math.sqrt(dx*dx+dy*dy);
-      if(d<connDist){bgCtx.beginPath();bgCtx.moveTo(bgStars[i].x,bgStars[i].y);bgCtx.lineTo(bgStars[j].x,bgStars[j].y);bgCtx.strokeStyle=`rgba(192,132,252,${lineAlpha*(1-d/connDist)})`;bgCtx.lineWidth=.5;bgCtx.stroke();}
+}
+
+function hexToRgba(hex, a){
+  const r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+function animateBg(){
+  bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+  const connDist  = 120 + intensity * 80;
+  const starAlpha = 0.5 + intensity * 0.5;
+
+  bgStars.forEach(s => {
+    s.x += s.vx; s.y += s.vy; s.pulse += .012;
+    if(s.x < 0) s.x = bgCanvas.width;
+    if(s.x > bgCanvas.width) s.x = 0;
+    if(s.y < 0) s.y = bgCanvas.height;
+    if(s.y > bgCanvas.height) s.y = 0;
+    const a = (Math.sin(s.pulse) * .4 + .6) * starAlpha;
+    bgCtx.beginPath();
+    bgCtx.arc(s.x, s.y, s.r * (1 + intensity * .5), 0, Math.PI * 2);
+    bgCtx.fillStyle = hexToRgba(s.color.startsWith('#') ? s.color : '#ffffff', a);
+    bgCtx.fill();
+  });
+
+  const lineAlpha = intensity * 0.25;
+  if(lineAlpha > 0.02){
+    for(let i = 0; i < bgStars.length; i++){
+      for(let j = i+1; j < bgStars.length; j++){
+        const dx = bgStars[i].x - bgStars[j].x, dy = bgStars[i].y - bgStars[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if(d < connDist){
+          bgCtx.beginPath();
+          bgCtx.moveTo(bgStars[i].x, bgStars[i].y);
+          bgCtx.lineTo(bgStars[j].x, bgStars[j].y);
+          bgCtx.strokeStyle = `rgba(192,132,252,${lineAlpha * (1 - d/connDist)})`;
+          bgCtx.lineWidth = .5;
+          bgCtx.stroke();
+        }
+      }
     }
   }
   requestAnimationFrame(animateBg);
 }
 animateBg();
 
-// ── PARTICLES ──
-const particleContainer=document.getElementById('particles');
-const COLORS=['#FF6B9D','#C084FC','#FBBF24','#FF8FB3','#A855F7','#FFB3CC'];
-let particles=[];
+// ============================================================
+//  FLOATING PARTICLES
+// ============================================================
+const particleContainer = document.getElementById('particles');
+const COLORS = ['#FF6B9D','#C084FC','#FBBF24','#FF8FB3','#A855F7','#FFB3CC'];
+let particles = [];
+
 function spawnParticle(){
-  const p=document.createElement('div');p.className='particle';
-  const size=3+Math.random()*7;
-  p.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${COLORS[Math.floor(Math.random()*COLORS.length)]};animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*3}s;`;
-  particleContainer.appendChild(p);particles.push(p);
-  if(particles.length>50){particles.shift().remove();}
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = 4 + Math.random() * 8;
+  p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${COLORS[Math.floor(Math.random()*COLORS.length)]};animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*3}s;`;
+  particleContainer.appendChild(p);
+  particles.push(p);
+  if(particles.length > 60){ particles.shift().remove(); }
 }
-for(let i=0;i<28;i++)spawnParticle();
+for(let i = 0; i < 35; i++) spawnParticle();
+
 function updateParticleIntensity(){
-  const target=Math.floor(8+intensity*42);
-  while(particles.length<target)spawnParticle();
-  while(particles.length>target+4){particles.shift().remove();}
+  const target = Math.floor(10 + intensity * 50);
+  while(particles.length < target) spawnParticle();
+  while(particles.length > target + 5){ particles.shift().remove(); }
 }
 
-// ── INTERACTIVE CONSTELLATION ──
-const iCanvas=document.getElementById('constell-interactive');
-const iCtx=iCanvas.getContext('2d');
-let iStars=[],iName='';
-function resizeICanvas(){const rect=iCanvas.getBoundingClientRect();iCanvas.width=rect.width;iCanvas.height=rect.height||300;drawConstellation();}
+// ============================================================
+//  INTERACTIVE CONSTELLATION CANVAS
+// ============================================================
+const iCanvas = document.getElementById('constell-interactive');
+const iCtx    = iCanvas.getContext('2d');
+let iStars    = [], iName = '';
+
+function resizeICanvas(){
+  const rect = iCanvas.getBoundingClientRect();
+  iCanvas.width  = rect.width;
+  iCanvas.height = rect.height || 420;
+  drawConstellation();
+}
+
 function drawConstellation(){
-  const w=iCanvas.width,h=iCanvas.height;
-  iCtx.clearRect(0,0,w,h);
-  iCtx.fillStyle='rgba(255,255,255,0.03)';
-  for(let x=20;x<w;x+=40)for(let y=20;y<h;y+=40)iCtx.fillRect(x,y,1,1);
-  if(iStars.length>1){
-    iCtx.beginPath();iCtx.moveTo(iStars[0].x,iStars[0].y);
-    for(let i=1;i<iStars.length;i++)iCtx.lineTo(iStars[i].x,iStars[i].y);
-    iCtx.strokeStyle='rgba(192,132,252,0.5)';iCtx.lineWidth=1.5;iCtx.setLineDash([6,4]);iCtx.stroke();iCtx.setLineDash([]);
+  const w = iCanvas.width, h = iCanvas.height;
+  iCtx.clearRect(0, 0, w, h);
+  iCtx.fillStyle = 'rgba(255,255,255,0.04)';
+  for(let x = 20; x < w; x += 40)
+    for(let y = 20; y < h; y += 40)
+      iCtx.fillRect(x, y, 1, 1);
+  if(iStars.length > 1){
+    iCtx.beginPath();
+    iCtx.moveTo(iStars[0].x, iStars[0].y);
+    for(let i = 1; i < iStars.length; i++) iCtx.lineTo(iStars[i].x, iStars[i].y);
+    iCtx.strokeStyle = 'rgba(192,132,252,0.5)';
+    iCtx.lineWidth   = 1.5;
+    iCtx.setLineDash([6, 4]);
+    iCtx.stroke();
+    iCtx.setLineDash([]);
   }
-  iStars.forEach((s,i)=>{
-    const grad=iCtx.createRadialGradient(s.x,s.y,0,s.x,s.y,16);
-    grad.addColorStop(0,'rgba(255,107,157,0.3)');grad.addColorStop(1,'rgba(255,107,157,0)');
-    iCtx.beginPath();iCtx.arc(s.x,s.y,16,0,Math.PI*2);iCtx.fillStyle=grad;iCtx.fill();
-    iCtx.beginPath();iCtx.arc(s.x,s.y,s.r||3.5,0,Math.PI*2);iCtx.fillStyle=i===0?'#FBBF24':'#fff';iCtx.fill();
-    iCtx.fillStyle='rgba(255,179,204,0.8)';iCtx.font='500 10px Inter,sans-serif';iCtx.textAlign='center';
-    iCtx.fillText(i+1,s.x,s.y-9);
+  iStars.forEach((s, i) => {
+    const grad = iCtx.createRadialGradient(s.x, s.y, 0, s.x, s.y, 18);
+    grad.addColorStop(0, 'rgba(255,107,157,0.35)');
+    grad.addColorStop(1, 'rgba(255,107,157,0)');
+    iCtx.beginPath(); iCtx.arc(s.x, s.y, 18, 0, Math.PI*2);
+    iCtx.fillStyle = grad; iCtx.fill();
+    iCtx.beginPath(); iCtx.arc(s.x, s.y, s.r || 4, 0, Math.PI*2);
+    iCtx.fillStyle = i === 0 ? '#FBBF24' : '#fff'; iCtx.fill();
+    iCtx.fillStyle = 'rgba(255,179,204,0.8)';
+    iCtx.font = '500 11px Inter,sans-serif';
+    iCtx.textAlign = 'center';
+    iCtx.fillText(i+1, s.x, s.y - 10);
   });
-  if(iName){iCtx.fillStyle='rgba(251,191,36,0.8)';iCtx.font="italic 600 15px 'Playfair Display',serif";iCtx.textAlign='center';iCtx.fillText(iName,w/2,h-18);}
-  if(iStars.length===0){iCtx.fillStyle='rgba(255,255,255,0.12)';iCtx.font='13px Inter,sans-serif';iCtx.textAlign='center';iCtx.fillText('✨ Tap anywhere to place your first star',w/2,h/2);}
+  if(iName){
+    iCtx.fillStyle = 'rgba(251,191,36,0.8)';
+    iCtx.font = "italic 600 16px 'Playfair Display',serif";
+    iCtx.textAlign = 'center';
+    iCtx.fillText(iName, w/2, h - 20);
+  }
+  if(iStars.length === 0){
+    iCtx.fillStyle = 'rgba(255,255,255,0.12)';
+    iCtx.font = '14px Inter,sans-serif';
+    iCtx.textAlign = 'center';
+    iCtx.fillText('✨ Click anywhere to place your first star', w/2, h/2);
+  }
 }
-function getCanvasPos(e,canvas){
-  const rect=canvas.getBoundingClientRect(),scaleX=canvas.width/rect.width,scaleY=canvas.height/rect.height;
-  const src=e.touches?e.touches[0]:e;
-  return{x:(src.clientX-rect.left)*scaleX,y:(src.clientY-rect.top)*scaleY};
-}
-iCanvas.addEventListener('click',function(e){const p=getCanvasPos(e,iCanvas);iStars.push({x:p.x,y:p.y,r:3+Math.random()*2.5});drawConstellation();spawnHearts({clientX:e.clientX,clientY:e.clientY});});
-iCanvas.addEventListener('dblclick',function(e){e.preventDefault();const n=prompt('Name your constellation ✨',iName||"Christa's Star");if(n!==null){iName=n;drawConstellation();}});
-function clearConstellation(){iStars=[];iName='';drawConstellation();}
+
+iCanvas.addEventListener('click', function(e){
+  const rect = iCanvas.getBoundingClientRect();
+  iStars.push({ x: e.clientX - rect.left, y: e.clientY - rect.top, r: 3 + Math.random()*3 });
+  drawConstellation();
+  spawnHearts({ clientX: e.clientX, clientY: e.clientY });
+});
+iCanvas.addEventListener('dblclick', function(e){
+  e.preventDefault();
+  const name = prompt('Name your constellation ✨', iName || "Christa's Star");
+  if(name !== null){ iName = name; drawConstellation(); }
+});
+function clearConstellation(){ iStars = []; iName = ''; drawConstellation(); }
 function loadPreset(type){
-  const w=iCanvas.width,h=iCanvas.height,cx=w/2,cy=h/2;iName='';
-  if(type==='heart'){
-    iName='Christa ♥';const pts=[];
-    for(let t=0;t<=Math.PI*2;t+=Math.PI/6){const x=16*Math.pow(Math.sin(t),3),y=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));pts.push({x:cx+x*8,y:cy+y*8,r:3.5});}
-    iStars=pts;
-  }else if(type==='flower'){
-    iName='Bloom 🌸';iStars=[{x:cx,y:cy,r:4.5}];
-    for(let i=0;i<8;i++){const a=(i/8)*Math.PI*2;iStars.push({x:cx+Math.cos(a)*70,y:cy+Math.sin(a)*70,r:3+Math.random()*2});}
-    for(let i=0;i<8;i++){const a=((i+.5)/8)*Math.PI*2;iStars.push({x:cx+Math.cos(a)*120,y:cy+Math.sin(a)*120,r:2+Math.random()*2});}
-  }else if(type==='gemini'){
-    iName='Gemini ♊ (June 16)';
-    iStars=[{x:cx-75,y:cy-65,r:4},{x:cx-50,y:cy-90,r:3.5},{x:cx-25,y:cy-65,r:4},{x:cx-50,y:cy-40,r:3},{x:cx-75,y:cy,r:3.5},{x:cx-25,y:cy,r:3.5},{x:cx-75,y:cy+58,r:4},{x:cx-25,y:cy+58,r:4},{x:cx+25,y:cy-65,r:4},{x:cx+50,y:cy-90,r:3.5},{x:cx+75,y:cy-65,r:4},{x:cx+50,y:cy-40,r:3},{x:cx+25,y:cy,r:3.5},{x:cx+75,y:cy,r:3.5},{x:cx+25,y:cy+58,r:4},{x:cx+75,y:cy+58,r:4}];
+  const w = iCanvas.width, h = iCanvas.height, cx = w/2, cy = h/2;
+  iName = '';
+  if(type === 'heart'){
+    iName = 'Christa ♥';
+    const pts = [];
+    for(let t = 0; t <= Math.PI*2; t += Math.PI/6){
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y = -(13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t));
+      pts.push({ x: cx + x*9, y: cy + y*9, r:4 });
+    }
+    iStars = pts;
+  } else if(type === 'flower'){
+    iName = 'Bloom 🌸';
+    iStars = [{ x:cx, y:cy, r:5 }];
+    for(let i=0;i<8;i++){
+      const a = (i/8)*Math.PI*2;
+      iStars.push({ x: cx+Math.cos(a)*80, y: cy+Math.sin(a)*80, r:3+Math.random()*2 });
+    }
+    for(let i=0;i<8;i++){
+      const a = ((i+.5)/8)*Math.PI*2;
+      iStars.push({ x: cx+Math.cos(a)*140, y: cy+Math.sin(a)*140, r:2+Math.random()*2 });
+    }
+  } else if(type === 'gemini'){
+    iName = 'Gemini ♊ (June 16)';
+    iStars = [
+      {x:cx-90,y:cy-80,r:5},{x:cx-60,y:cy-110,r:4},{x:cx-30,y:cy-80,r:5},
+      {x:cx-60,y:cy-50,r:3},{x:cx-90,y:cy,r:4},{x:cx-30,y:cy,r:4},
+      {x:cx-90,y:cy+70,r:5},{x:cx-30,y:cy+70,r:5},
+      {x:cx+30,y:cy-80,r:5},{x:cx+60,y:cy-110,r:4},{x:cx+90,y:cy-80,r:5},
+      {x:cx+60,y:cy-50,r:3},{x:cx+30,y:cy,r:4},{x:cx+90,y:cy,r:4},
+      {x:cx+30,y:cy+70,r:5},{x:cx+90,y:cy+70,r:5},
+    ];
   }
   drawConstellation();
 }
-function saveConstellation(){const a=document.createElement('a');a.download='christa-constellation.png';a.href=iCanvas.toDataURL();a.click();}
-window.addEventListener('resize',()=>setTimeout(resizeICanvas,100));
-setTimeout(resizeICanvas,200);
-
-// ── COUNTDOWN ──
-function updateCountdown(){
-  const now=new Date();let target=new Date('2026-06-16T00:00:00');
-  if(now>=target&&now<new Date('2026-06-17T00:00:00')){
-    ['days','hours','mins','secs'].forEach(k=>document.getElementById('cd-'+k).textContent='00');
-    document.getElementById('bday-msg').style.display='block';launchConfetti();return;
-  }
-  if(now>=new Date('2026-06-17T00:00:00'))target=new Date('2027-06-16T00:00:00');
-  const diff=target-now,d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
-  document.getElementById('cd-days').textContent=String(d).padStart(2,'0');
-  document.getElementById('cd-hours').textContent=String(h).padStart(2,'0');
-  document.getElementById('cd-mins').textContent=String(m).padStart(2,'0');
-  document.getElementById('cd-secs').textContent=String(s).padStart(2,'0');
+function saveConstellation(){
+  const link = document.createElement('a');
+  link.download = 'christa-constellation.png';
+  link.href = iCanvas.toDataURL();
+  link.click();
 }
-setInterval(updateCountdown,1000);updateCountdown();
+window.addEventListener('resize', () => setTimeout(resizeICanvas, 100));
+setTimeout(resizeICanvas, 200);
 
-// ── SCROLL REVEAL ──
-const revEls=document.querySelectorAll('.reveal');
-const revObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.08});
+// ============================================================
+//  COUNTDOWN
+// ============================================================
+function updateCountdown(){
+  const now = new Date();
+  let target = new Date('2026-06-16T00:00:00');
+  if(now >= target && now < new Date('2026-06-17T00:00:00')){
+    ['days','hours','mins','secs'].forEach(k=>document.getElementById('cd-'+k).textContent='00');
+    document.getElementById('bday-msg').style.display='block';
+    launchConfetti(); return;
+  }
+  if(now >= new Date('2026-06-17T00:00:00')) target = new Date('2027-06-16T00:00:00');
+  const diff = target - now;
+  const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000),
+        m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
+  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+}
+setInterval(updateCountdown, 1000); updateCountdown();
+
+// ============================================================
+//  SCROLL REVEAL
+// ============================================================
+const revEls = document.querySelectorAll('.reveal');
+const revObs = new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.12});
 revEls.forEach(r=>revObs.observe(r));
 
-// ── HEART SPARKS ──
+// ============================================================
+//  HEART SPARKS
+// ============================================================
 function spawnHearts(e){
   const emojis=['❤️','💕','🌸','💖','✨','💗','🦋'];
-  for(let i=0;i<5;i++){
+  for(let i=0;i<6;i++){
     setTimeout(()=>{
-      const h=document.createElement('div');h.className='float-heart';
+      const h=document.createElement('div');
+      h.className='float-heart';
       h.textContent=emojis[Math.floor(Math.random()*emojis.length)];
-      h.style.left=(e.clientX+(Math.random()-.5)*50)+'px';
-      h.style.top=(e.clientY-16)+'px';
-      h.style.fontSize=(.8+Math.random()*1.1)+'rem';
-      document.body.appendChild(h);setTimeout(()=>h.remove(),2000);
-    },i*90);
+      h.style.left=(e.clientX+(Math.random()-.5)*60)+'px';
+      h.style.top=(e.clientY-20)+'px';
+      h.style.fontSize=(.8+Math.random()*1.2)+'rem';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),2000);
+    },i*100);
   }
 }
 
-// ── CONFETTI ──
+// ============================================================
+//  CONFETTI
+// ============================================================
 function launchConfetti(){
   const cols=['#FF6B9D','#C084FC','#FBBF24','#FF8FB3','#6EE7B7','#A5F3FC'];
-  for(let i=0;i<70;i++)setTimeout(()=>{
-    const c=document.createElement('div');c.className='confetti-piece';
+  for(let i=0;i<90;i++) setTimeout(()=>{
+    const c=document.createElement('div');
+    c.className='confetti-piece';
     c.style.cssText=`left:${Math.random()*100}vw;top:-10px;background:${cols[Math.floor(Math.random()*cols.length)]};transform:rotate(${Math.random()*360}deg);animation-delay:${Math.random()}s;border-radius:${Math.random()>.5?'50%':'2px'};`;
-    document.body.appendChild(c);setTimeout(()=>c.remove(),3200);
-  },i*28);
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),3500);
+  },i*25);
 }
 
-// ── MODAL ──
-function openModal(html){document.getElementById('modalContent').innerHTML=html;document.getElementById('modalOverlay').classList.add('active');document.body.style.overflow='hidden';}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow='';}
-function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+// ============================================================
+//  MODAL
+// ============================================================
+function openModal(html){ document.getElementById('modalContent').innerHTML=html; document.getElementById('modalOverlay').classList.add('active'); }
+function closeModal(){ document.getElementById('modalOverlay').classList.remove('active'); }
+function closeModalOutside(e){ if(e.target===document.getElementById('modalOverlay')) closeModal(); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
-// ── GAMES ──
+// ============================================================
+//  GAMES
+// ============================================================
 const matchEmojis=['🌸','💕','✨','🦋','🌙','💖','🌺','🎂'];
 let matchCards=[],matchFlipped=[],matchSolved=0,matchLock=false;
+
 function memoryMatchHTML(){
   matchCards=[...matchEmojis,...matchEmojis].sort(()=>Math.random()-.5);
-  matchFlipped=[];matchSolved=0;matchLock=false;
+  matchFlipped=[]; matchSolved=0; matchLock=false;
   return `<div class="modal-title">🃏 Memory Match</div>
-    <p style="text-align:center;font-size:.83rem;color:rgba(255,255,255,.42);margin-bottom:1rem">Find all the matching pairs!</p>
+    <p style="text-align:center;font-size:.85rem;color:rgba(255,255,255,.45);margin-bottom:1rem">Find all the matching pairs!</p>
     <div class="match-grid">${matchCards.map((e,i)=>`<div class="match-card face-down" id="mc${i}" onclick="flipCard(${i})">${e}</div>`).join('')}</div>
-    <p style="text-align:center;font-size:.78rem;color:rgba(255,255,255,.28);margin-top:.75rem" id="matchStatus">Pairs found: 0/8</p>`;
+    <p style="text-align:center;font-size:.8rem;color:rgba(255,255,255,.3);margin-top:.75rem" id="matchStatus">Pairs found: 0/8</p>`;
 }
 function flipCard(i){
-  if(matchLock)return;const card=document.getElementById('mc'+i);
+  if(matchLock)return;
+  const card=document.getElementById('mc'+i);
   if(card.classList.contains('matched')||!card.classList.contains('face-down'))return;
-  card.classList.remove('face-down');matchFlipped.push(i);
+  card.classList.remove('face-down');
+  matchFlipped.push(i);
   if(matchFlipped.length===2){
-    matchLock=true;const[a,b]=matchFlipped;
+    matchLock=true;
+    const [a,b]=matchFlipped;
     if(matchCards[a]===matchCards[b]){
-      document.getElementById('mc'+a).classList.add('matched');document.getElementById('mc'+b).classList.add('matched');
-      matchSolved++;document.getElementById('matchStatus').textContent='Pairs found: '+matchSolved+'/8';
-      matchFlipped=[];matchLock=false;
-      if(matchSolved===8){setTimeout(()=>{document.getElementById('matchStatus').innerHTML='<span style="color:#6EE7B7">🎉 You did it!</span>';launchConfetti();},350);}
-    }else{setTimeout(()=>{document.getElementById('mc'+a).classList.add('face-down');document.getElementById('mc'+b).classList.add('face-down');matchFlipped=[];matchLock=false;},850);}
+      document.getElementById('mc'+a).classList.add('matched');
+      document.getElementById('mc'+b).classList.add('matched');
+      matchSolved++;
+      document.getElementById('matchStatus').textContent='Pairs found: '+matchSolved+'/8';
+      matchFlipped=[]; matchLock=false;
+      if(matchSolved===8){ setTimeout(()=>{ document.getElementById('matchStatus').innerHTML='<span style="color:#6EE7B7">🎉 You did it!</span>'; launchConfetti(); },400); }
+    } else {
+      setTimeout(()=>{ document.getElementById('mc'+a).classList.add('face-down'); document.getElementById('mc'+b).classList.add('face-down'); matchFlipped=[]; matchLock=false; },900);
+    }
   }
 }
 
 const wishes=['This year, a door opens that changes everything. ✨','Someone who matters deeply will tell you exactly how much. 💕','Your biggest dream is closer than you think. 🌸','An adventure you never planned will become your favourite story. 🦋','You will feel the most at home in yourself. 🌙','Something beautiful is already on its way to you. 💫','Your kindness will come back to you tenfold. 🌺','This is the year things click into place. 🌟'];
 let spinning=false,spinDeg=0;
+
 function spinnerHTML(){
-  const segs=8,angle=360/segs;
+  const segs=8, angle=360/segs;
   const cols=['#FF6B9D','#C084FC','#FBBF24','#FF8FB3','#A855F7','#FFB3CC','#7C3AED','#F472B6'];
   const emojis=['💌','🌸','✨','🦋','🌙','💕','🌺','🌟'];
   let paths='';
   for(let i=0;i<segs;i++){
-    const sa=(i*angle-90)*Math.PI/180,ea=((i+1)*angle-90)*Math.PI/180,r=130;
+    const sa=(i*angle-90)*Math.PI/180, ea=((i+1)*angle-90)*Math.PI/180, r=130;
     const x1=140+r*Math.cos(sa),y1=140+r*Math.sin(sa),x2=140+r*Math.cos(ea),y2=140+r*Math.sin(ea);
     paths+=`<path d="M140,140 L${x1},${y1} A${r},${r} 0 0,1 ${x2},${y2} Z" fill="${cols[i]}" opacity=".88"/>`;
     const ma=((i+.5)*angle-90)*Math.PI/180;
     paths+=`<text x="${140+78*Math.cos(ma)}" y="${140+78*Math.sin(ma)}" text-anchor="middle" dominant-baseline="middle" font-size="18" fill="white" transform="rotate(${i*angle+angle/2},${140+78*Math.cos(ma)},${140+78*Math.sin(ma)})">${emojis[i]}</text>`;
   }
   return `<div class="modal-title">🌀 Wish Spinner</div>
-    <div class="spinner-wrap"><div class="spinner-pin">📍</div>
-    <svg id="wheel" viewBox="0 0 280 280" style="width:100%;height:100%;border-radius:50%;border:3px solid rgba(255,107,157,.3);cursor:pointer;box-shadow:0 0 32px rgba(255,107,157,.18);transition:transform 4s cubic-bezier(.17,.67,.12,.99);display:block;" onclick="doSpin()">${paths}</svg></div>
-    <p id="spin-result" style="font-family:'Playfair Display',serif;font-size:.95rem;font-style:italic;color:#FFB3CC;text-align:center;min-height:3rem;padding:0 .5rem">Tap the wheel to spin your birthday wish! 🎂</p>
-    <button class="btn btn-ghost" onclick="doSpin()" style="margin-top:.85rem;width:100%">🌀 Spin!</button>`;
+    <div class="spinner-wrap">
+      <div class="spinner-pin">📍</div>
+      <svg id="wheel" viewBox="0 0 280 280" style="width:100%;height:100%;border-radius:50%;border:4px solid rgba(255,107,157,.3);cursor:pointer;box-shadow:0 0 40px rgba(255,107,157,.2);transition:transform 4s cubic-bezier(.17,.67,.12,.99);display:block;" onclick="doSpin()">${paths}</svg>
+    </div>
+    <p id="spin-result" style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:#FFB3CC;text-align:center;min-height:3rem;padding:0 1rem">Tap the wheel to spin your birthday wish! 🎂</p>
+    <button class="btn btn-ghost" onclick="doSpin()" style="margin-top:1rem;width:100%">🌀 Spin!</button>`;
 }
 function doSpin(){
-  if(spinning)return;spinning=true;const wheel=document.getElementById('wheel');
-  const extra=2880+Math.random()*1440;spinDeg+=extra;
+  if(spinning)return; spinning=true;
+  const wheel=document.getElementById('wheel');
+  const extra=2880+Math.random()*1440;
+  spinDeg+=extra;
   wheel.style.transform=`rotate(${spinDeg}deg)`;
-  setTimeout(()=>{spinning=false;document.getElementById('spin-result').textContent=wishes[Math.floor(Math.random()*wishes.length)];launchConfetti();},4100);
+  setTimeout(()=>{ spinning=false; document.getElementById('spin-result').textContent=wishes[Math.floor(Math.random()*wishes.length)]; launchConfetti(); },4100);
 }
 
 const truths=[{emoji:'🌸',t:'You are enough exactly as you are.'},{emoji:'💫',t:'Your sensitivity is a strength, not a weakness.'},{emoji:'🦋',t:'The world needs your specific kind of light.'},{emoji:'🌙',t:"Rest is productive. You don't have to earn softness."},{emoji:'💕',t:'Being loved by you is a privilege.'},{emoji:'✨',t:'Your future self is already proud of you.'},{emoji:'🌺',t:'You are allowed to want big things.'},{emoji:'💖',t:'The best is genuinely still ahead.'}];
 let truthIdx=0;
+
 function truthHTML(){
   const t=truths[truthIdx];
   return `<div class="modal-title">🌸 Birthday Truths</div>
-    <div style="text-align:center;margin:1.75rem 0">
-      <div style="font-size:3.5rem;margin-bottom:1.25rem">${t.emoji}</div>
-      <p style="font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.83)">${t.t}</p>
+    <div style="text-align:center;margin:2rem 0">
+      <div style="font-size:4rem;margin-bottom:1.5rem">${t.emoji}</div>
+      <p style="font-family:'Playfair Display',serif;font-size:1.3rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.85)">${t.t}</p>
     </div>
-    <div style="display:flex;gap:.65rem;margin-top:.85rem">
+    <div style="display:flex;gap:.75rem;margin-top:1rem">
       <button class="btn btn-primary" onclick="nextTruth()" style="flex:1">Next ✨</button>
       <button class="btn btn-ghost" onclick="truthIdx=0;renderTruth();" style="flex:1">Start over 🌸</button>
     </div>
-    <p style="text-align:center;font-size:.72rem;color:rgba(255,255,255,.28);margin-top:.65rem">${truthIdx+1}/${truths.length}</p>`;
+    <p style="text-align:center;font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.75rem">${truthIdx+1}/${truths.length}</p>`;
 }
-function nextTruth(){truthIdx=(truthIdx+1)%truths.length;if(truthIdx===0)launchConfetti();renderTruth();}
-function renderTruth(){document.getElementById('modalContent').innerHTML=truthHTML();}
+function nextTruth(){ truthIdx=(truthIdx+1)%truths.length; if(truthIdx===0)launchConfetti(); renderTruth(); }
+function renderTruth(){ document.getElementById('modalContent').innerHTML=truthHTML(); }
 
-const poemLines=[
-  {static:'You are like',choices:['the moon at 3am','a warm summer rain','the first page of a good book','golden hour light']},
-  {static:'Your laugh sounds like',choices:['church bells in the wind',"a song I can't forget",'the best day of summer','stars deciding to shine']},
-  {static:'The world is softer because',choices:['you exist in it','you choose kindness','you never gave up','you kept being you']},
-  {static:'This year will bring you',choices:['everything you deserve','all the love you\'ve given','your biggest dream yet','peace you\'ve been missing']},
+const poemLines = [
+  { static:'You are like', choices:['the moon at 3am','a warm summer rain','the first page of a good book','golden hour light'] },
+  { static:'Your laugh sounds like', choices:['church bells in the wind',"a song I can't forget",'the best day of summer','stars deciding to shine'] },
+  { static:'The world is softer because', choices:['you exist in it','you choose kindness','you never gave up','you kept being you'] },
+  { static:'This year will bring you', choices:['everything you deserve','all the love you\'ve given','your biggest dream yet','peace you\'ve been missing'] },
 ];
-let poemChoices=['','','',''];
+let poemChoices = ['','','',''];
+
 function poemHTML(){
   return `<div class="modal-title">✍️ Poem Builder</div>
-    <p style="text-align:center;font-size:.8rem;color:rgba(255,255,255,.38);margin-bottom:1.1rem">Pick one per line to build your poem 🌸</p>
-    ${poemLines.map((line,li)=>`
-      <div class="poem-section">
-        <div class="poem-label">${line.static}</div>
-        <div class="poem-picks">${line.choices.map(c=>`<span class="poem-pick ${poemChoices[li]===c?'selected':''}" onclick="pickPoem(${li},'${c.replace(/'/g,"\\'")}',this)">${c}</span>`).join('')}</div>
-      </div>`).join('')}
+    <p style="text-align:center;font-size:.82rem;color:rgba(255,255,255,.4);margin-bottom:1.25rem">Pick one option per line to build your birthday poem 🌸</p>
+    <div class="poem-parts">
+      ${poemLines.map((line,li)=>`
+        <div style="margin-bottom:.85rem">
+          <p style="font-size:.78rem;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.4rem">${line.static}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:.4rem">
+            ${line.choices.map((c,ci)=>`<span class="poem-pick ${poemChoices[li]===c?'selected':''}" onclick="pickPoem(${li},'${c.replace(/'/g,"\\'")}',this)">${c}</span>`).join('')}
+          </div>
+        </div>`).join('')}
+    </div>
     <div class="poem-output" id="poemOut">${buildPoem()}</div>
-    <div style="display:flex;gap:.65rem;margin-top:.85rem">
+    <div style="display:flex;gap:.75rem;margin-top:1rem">
       <button class="btn btn-primary" onclick="poemChoices=['','','',''];openGame('poem');" style="flex:1">🔄 Reset</button>
-      <button class="btn btn-ghost" onclick="copyPoem()" style="flex:1">📋 Copy</button>
+      <button class="btn btn-ghost" onclick="copyPoem()" style="flex:1">📋 Copy poem</button>
     </div>`;
 }
 function buildPoem(){
-  const filled=poemLines.every((_,i)=>poemChoices[i]);
-  if(!filled)return '<span style="color:rgba(255,255,255,.22)">Pick an option for each line...</span>';
+  const filled = poemLines.every((_,i)=>poemChoices[i]);
+  if(!filled) return '<span style="color:rgba(255,255,255,.25)">Pick an option for each line to reveal your poem…</span>';
   return poemLines.map((line,i)=>`<em>${line.static}</em> <strong style="color:var(--blush)">${poemChoices[i]}</strong>`).join(',<br>');
 }
-function pickPoem(lineIdx,choice,el){
-  poemChoices[lineIdx]=choice;
-  el.closest('.poem-picks').querySelectorAll('.poem-pick').forEach(p=>p.classList.remove('selected'));
+function pickPoem(lineIdx, choice, el){
+  poemChoices[lineIdx] = choice;
+  el.closest('div').querySelectorAll('.poem-pick').forEach(p=>p.classList.remove('selected'));
   el.classList.add('selected');
-  document.getElementById('poemOut').innerHTML=buildPoem();
+  document.getElementById('poemOut').innerHTML = buildPoem();
 }
 function copyPoem(){
-  const txt=poemLines.map((line,i)=>poemChoices[i]?`${line.static} ${poemChoices[i]}`:'').filter(Boolean).join(', ');
-  if(!txt){alert('Finish building your poem first! 🌸');return;}
-  navigator.clipboard.writeText('Happy Birthday Christa! 🌸\n\n'+txt+'\n\n— With love ✨').then(()=>{launchConfetti();alert('Poem copied! 💕');});
+  const txt = poemLines.map((line,i)=>poemChoices[i]?`${line.static} ${poemChoices[i]}`:'').filter(Boolean).join(', ');
+  if(!txt){ alert('Finish building your poem first! 🌸'); return; }
+  navigator.clipboard.writeText('Happy Birthday Christa! 🌸\n\n'+txt+'\n\n— With love ✨').then(()=>{ launchConfetti(); alert('Poem copied! 💕'); });
 }
 
-let dCtx,dDrawing=false,dColor='#FF6B9D',dSize=4;
+let dCtx, dDrawing=false, dColor='#FF6B9D', dSize=4;
 const dColors=['#FF6B9D','#C084FC','#FBBF24','#6EE7B7','#A5F3FC','#F472B6','#fff'];
+
 function doodleHTML(){
   return `<div class="modal-title">🎨 Birthday Doodle</div>
     <div class="doodle-tools">
@@ -813,16 +918,19 @@ function doodleHTML(){
       <button class="doodle-size" onclick="clearDoodle()">🗑 Clear</button>
       <button class="doodle-size" onclick="saveDoodle()">💾 Save</button>
     </div>
-    <canvas id="doodle-canvas" width="460" height="260"></canvas>
-    <p style="text-align:center;font-size:.72rem;color:rgba(255,255,255,.22);margin-top:.5rem">Draw something beautiful for Christa 🌸</p>`;
+    <canvas id="doodle-canvas" width="460" height="300"></canvas>
+    <p style="text-align:center;font-size:.75rem;color:rgba(255,255,255,.25);margin-top:.6rem">Draw something beautiful for Christa 🌸</p>`;
 }
 function initDoodle(){
-  const canvas=document.getElementById('doodle-canvas');if(!canvas)return;
-  dCtx=canvas.getContext('2d');dCtx.lineCap='round';dCtx.lineJoin='round';
+  const canvas=document.getElementById('doodle-canvas');
+  if(!canvas)return;
+  dCtx=canvas.getContext('2d');
+  dCtx.lineCap='round';dCtx.lineJoin='round';
   const getPos=(e)=>{
-    const r=canvas.getBoundingClientRect(),scaleX=canvas.width/r.width;
+    const r=canvas.getBoundingClientRect();
+    const scaleX=canvas.width/r.width;
     const t=e.touches?e.touches[0]:e;
-    return{x:(t.clientX-r.left)*scaleX,y:(t.clientY-r.top)*scaleX};
+    return {x:(t.clientX-r.left)*scaleX, y:(t.clientY-r.top)*scaleX};
   };
   canvas.addEventListener('mousedown',e=>{dDrawing=true;const p=getPos(e);dCtx.beginPath();dCtx.moveTo(p.x,p.y);});
   canvas.addEventListener('mousemove',e=>{if(!dDrawing)return;const p=getPos(e);dCtx.lineTo(p.x,p.y);dCtx.strokeStyle=dColor;dCtx.lineWidth=dSize*2;dCtx.stroke();});
@@ -832,81 +940,187 @@ function initDoodle(){
   canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!dDrawing)return;const p=getPos(e);dCtx.lineTo(p.x,p.y);dCtx.strokeStyle=dColor;dCtx.lineWidth=dSize*2;dCtx.stroke();},{passive:false});
   canvas.addEventListener('touchend',()=>dDrawing=false);
 }
-function setDoodleColor(c,el){dColor=c;document.querySelectorAll('.doodle-color').forEach(d=>d.classList.remove('active'));el.classList.add('active');}
-function setDoodleSize(s,el){dSize=s;document.querySelectorAll('.doodle-size').forEach(d=>d.classList.remove('active'));el.classList.add('active');}
-function clearDoodle(){if(dCtx)dCtx.clearRect(0,0,460,260);}
-function saveDoodle(){const c=document.getElementById('doodle-canvas');if(!c)return;const a=document.createElement('a');a.download='christa-birthday-doodle.png';a.href=c.toDataURL();a.click();}
-function openGame(type){
-  if(type==='memory')openModal(memoryMatchHTML());
-  else if(type==='spinner'){spinning=false;spinDeg=0;openModal(spinnerHTML());}
-  else if(type==='truth'){truthIdx=0;openModal(truthHTML());}
-  else if(type==='poem'){poemChoices=['','','',''];openModal(poemHTML());}
-  else if(type==='doodle'){openModal(doodleHTML());setTimeout(initDoodle,100);}
+function setDoodleColor(c,el){
+  dColor=c;
+  document.querySelectorAll('.doodle-color').forEach(d=>d.classList.remove('active'));
+  el.classList.add('active');
+}
+function setDoodleSize(s,el){
+  dSize=s;
+  document.querySelectorAll('.doodle-size').forEach(d=>d.classList.remove('active'));
+  el.classList.add('active');
+}
+function clearDoodle(){ if(dCtx) dCtx.clearRect(0,0,460,300); }
+function saveDoodle(){
+  const c=document.getElementById('doodle-canvas');
+  if(!c)return;
+  const a=document.createElement('a');
+  a.download='christa-birthday-doodle.png';
+  a.href=c.toDataURL(); a.click();
 }
 
-// ── MEMORY JAR ──
+function openGame(type){
+  if(type==='memory') openModal(memoryMatchHTML());
+  else if(type==='spinner'){ spinning=false;spinDeg=0;openModal(spinnerHTML()); }
+  else if(type==='truth'){ truthIdx=0;openModal(truthHTML()); }
+  else if(type==='poem'){ poemChoices=['','','',''];openModal(poemHTML()); }
+  else if(type==='doodle'){ openModal(doodleHTML());setTimeout(initDoodle,100); }
+}
+
+// ============================================================
+//  MEMORY JAR
+// ============================================================
 function addMemory(){
-  const input=document.getElementById('memInput');const text=input.value.trim();if(!text)return;
+  const input=document.getElementById('memInput');
+  const text=input.value.trim(); if(!text)return;
   const emojis=['🌸','💕','✨','🦋','💖','🌺','🌟','💫'];
-  const item=document.createElement('div');item.className='memory-item';
+  const item=document.createElement('div');
+  item.className='memory-item';
   item.innerHTML=`<span>${emojis[Math.floor(Math.random()*emojis.length)]}</span><span>${text}</span>`;
-  document.getElementById('memoriesList').prepend(item);input.value='';
+  document.getElementById('memoriesList').prepend(item);
+  input.value='';
   spawnHearts({clientX:window.innerWidth/2,clientY:window.innerHeight/2});
 }
 
-// ── MUSIC PLAYER ──
-const mpTracks=[
-  {title:'Blue',artist:'Yung Kai',emoji:'💙',src:'music/blue.mp3'},
-  {title:'Golden Brown',artist:'The Stranglers',emoji:'🤎',src:'music/Golden Brown.mp3'},
-  {title:'Perfect',artist:'Ed Sheeran',emoji:'✨',src:'music/perfect.mp3'},
-  {title:'I Think They Call This Love',artist:'Elliot James Reay',emoji:'💌',src:'music/I Think They Call This Love.mp3'}
+// ============================================================
+//  NATIVE INTERACTION PLAYER INFRASTRUCTURE
+// ============================================================
+const mpTracks = [
+  { title: 'Blue', artist: 'Yung Kai', emoji: '💙', src: 'music/blue.mp3' },
+  { title: 'Golden Brown', artist: 'The Stranglers', emoji: '🤎', src: 'music/Golden Brown.mp3' },
+  { title: 'Perfect', artist: 'Ed Sheeran', emoji: '✨', src: 'music/perfect.mp3' },
+  { title: 'I Think They Call This Love', artist: 'Elliot James Reay', emoji: '💌', src: 'music/I Think They Call This Love.mp3' }
 ];
-let mpCurrent=0;const mpAudio=new Audio();let mpPlaying=false;
-function mpFmt(s){if(!s||isNaN(s))return'0:00';const m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec;}
+
+let mpCurrent = 0;
+const mpAudio = new Audio();
+let mpPlaying = false;
+
+function mpFmt(s){
+  if(!s || isNaN(s)) return '0:00';
+  const m = Math.floor(s / 60), sec = Math.floor(s % 60);
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
 function mpBuildList(){
-  const el=document.getElementById('mpTracklist');if(!el)return;
-  el.innerHTML=mpTracks.map((t,i)=>`
-    <button class="mp-track${i===mpCurrent?' active':''}" onclick="mpSelect(${i})">
-      <span class="mp-track-num">${i+1}</span>
-      <span class="mp-wave${mpPlaying&&i===mpCurrent?'':' paused'}"><span></span><span></span><span></span></span>
+  const el = document.getElementById('mpTracklist');
+  if(!el) return;
+  el.innerHTML = mpTracks.map((t, i) => `
+    <button class="mp-track${i === mpCurrent ? ' active' : ''}" onclick="mpSelect(${i})">
+      <span class="mp-track-num">${i + 1}</span>
+      <span class="mp-wave${mpPlaying && i === mpCurrent ? '' : ' paused'}">
+        <span></span><span></span><span></span>
+      </span>
       <span class="mp-track-emoji">${t.emoji}</span>
-      <span class="mp-track-info2">
+      <span class="mp-track-info">
         <div class="mp-track-name">${t.title}</div>
         <div class="mp-track-artist">${t.artist}</div>
       </span>
       <span class="mp-track-dur" id="mpDur-${i}">--:--</span>
     </button>`).join('');
-  mpTracks.forEach((t,i)=>{const ta=new Audio(t.src);ta.addEventListener('loadedmetadata',()=>{const rd=document.getElementById(`mpDur-${i}`);if(rd)rd.textContent=mpFmt(ta.duration);});});
+    
+  // Pre-calculate track row metadata durations cleanly
+  mpTracks.forEach((t, i) => {
+    const tempAudio = new Audio(t.src);
+    tempAudio.addEventListener('loadedmetadata', () => {
+      const rowDur = document.getElementById(`mpDur-${i}`);
+      if(rowDur) rowDur.textContent = mpFmt(tempAudio.duration);
+    });
+  });
 }
-function mpSelect(idx){
-  mpCurrent=idx;mpAudio.src=mpTracks[mpCurrent].src;mpAudio.load();
-  document.getElementById('mpArt').textContent=mpTracks[mpCurrent].emoji;
-  document.getElementById('mpTitle').textContent=mpTracks[mpCurrent].title;
-  document.getElementById('mpArtist').textContent=mpTracks[mpCurrent].artist;
-  if(mpPlaying){mpAudio.play().catch(()=>mpSetPlayingState(false));}else{mpSetPlayingState(false);}
+
+function mpSelect(idx) {
+  mpCurrent = idx;
+  mpAudio.src = mpTracks[mpCurrent].src;
+  mpAudio.load();
+  
+  document.getElementById('mpArt').textContent = mpTracks[mpCurrent].emoji;
+  document.getElementById('mpTitle').textContent = mpTracks[mpCurrent].title;
+  document.getElementById('mpArtist').textContent = mpTracks[mpCurrent].artist;
+  
+  if (mpPlaying) {
+    mpAudio.play().catch(() => mpSetPlayingState(false));
+  } else {
+    mpSetPlayingState(false);
+  }
   mpBuildList();
 }
-function mpSetPlayingState(isPlaying){
-  mpPlaying=isPlaying;document.getElementById('mpPlayBtn').textContent=isPlaying?'⏸':'▶';
-  const wave=document.querySelector('.mp-track.active .mp-wave');
-  if(wave){if(isPlaying)wave.classList.remove('paused');else wave.classList.add('paused');}
+
+function mpSetPlayingState(isPlaying) {
+  mpPlaying = isPlaying;
+  document.getElementById('mpPlayBtn').textContent = isPlaying ? '⏸' : '▶';
+  const wave = document.querySelector('.mp-track.active .mp-wave');
+  if (wave) {
+    if (isPlaying) wave.classList.remove('paused');
+    else wave.classList.add('paused');
+  }
 }
+
 function mpToggle(){
-  if(mpAudio.src===''||mpCurrent<0){mpSelect(0);}
-  if(mpPlaying){mpAudio.pause();mpSetPlayingState(false);mpBuildList();}
-  else{mpAudio.play().then(()=>{mpSetPlayingState(true);mpBuildList();}).catch(()=>{});}
+  if (mpAudio.src === '' || mpCurrent < 0) {
+    mpSelect(0);
+  }
+  if (mpPlaying) {
+    mpAudio.pause();
+    mpSetPlayingState(false);
+    mpBuildList();
+  } else {
+    mpAudio.play()
+      .then(() => {
+        mpSetPlayingState(true);
+        mpBuildList();
+      })
+      .catch(err => console.log("Engine waiting for explicit framework interaction loop gesture."));
+  }
 }
-function mpPrev(){let idx=mpCurrent-1;if(idx<0)idx=mpTracks.length-1;mpSelect(idx);mpAudio.play().then(()=>mpSetPlayingState(true)).catch(()=>mpSetPlayingState(false));}
-function mpNext(){let idx=mpCurrent+1;if(idx>=mpTracks.length)idx=0;mpSelect(idx);mpAudio.play().then(()=>mpSetPlayingState(true)).catch(()=>mpSetPlayingState(false));}
-mpAudio.addEventListener('timeupdate',()=>{if(!mpAudio.duration)return;const pct=(mpAudio.currentTime/mpAudio.duration)*100;document.getElementById('mpBarFill').style.width=pct+'%';document.getElementById('mpBarInput').value=pct;document.getElementById('mpCur').textContent=mpFmt(mpAudio.currentTime);});
-mpAudio.addEventListener('loadedmetadata',()=>{document.getElementById('mpDur').textContent=mpFmt(mpAudio.duration);});
-mpAudio.addEventListener('ended',()=>{mpNext();});
-document.getElementById('mpBarInput').addEventListener('input',function(){if(!mpAudio.duration)return;mpAudio.currentTime=(this.value/100)*mpAudio.duration;});
-document.getElementById('mpVol').addEventListener('input',function(){mpAudio.volume=parseFloat(this.value);});
-mpAudio.src=mpTracks[mpCurrent].src;
-document.getElementById('mpArt').textContent=mpTracks[mpCurrent].emoji;
-document.getElementById('mpTitle').textContent=mpTracks[mpCurrent].title;
-document.getElementById('mpArtist').textContent=mpTracks[mpCurrent].artist;
+
+function mpPrev(){
+  let idx = mpCurrent - 1;
+  if (idx < 0) idx = mpTracks.length - 1;
+  mpSelect(idx);
+  mpAudio.play().then(() => mpSetPlayingState(true)).catch(() => mpSetPlayingState(false));
+}
+
+function mpNext(){
+  let idx = mpCurrent + 1;
+  if (idx >= mpTracks.length) idx = 0;
+  mpSelect(idx);
+  mpAudio.play().then(() => mpSetPlayingState(true)).catch(() => mpSetPlayingState(false));
+}
+
+// Audio Runtime Synchronization Hooks
+mpAudio.addEventListener('timeupdate', () => {
+  if (!mpAudio.duration) return;
+  const pct = (mpAudio.currentTime / mpAudio.duration) * 100;
+  document.getElementById('mpBarFill').style.width = pct + '%';
+  document.getElementById('mpBarInput').value = pct;
+  document.getElementById('mpCur').textContent = mpFmt(mpAudio.currentTime);
+});
+
+mpAudio.addEventListener('loadedmetadata', () => {
+  document.getElementById('mpDur').textContent = mpFmt(mpAudio.duration);
+});
+
+mpAudio.addEventListener('ended', () => {
+  mpNext();
+});
+
+// User seek tracking interactions
+document.getElementById('mpBarInput').addEventListener('input', function(){
+  if (!mpAudio.duration) return;
+  mpAudio.currentTime = (this.value / 100) * mpAudio.duration;
+});
+
+// Dynamic volume attenuation mapping
+document.getElementById('mpVol').addEventListener('input', function(){
+  mpAudio.volume = parseFloat(this.value);
+});
+
+// Initialize Native Runtime Track Array Layouts
+mpAudio.src = mpTracks[mpCurrent].src;
+document.getElementById('mpArt').textContent = mpTracks[mpCurrent].emoji;
+document.getElementById('mpTitle').textContent = mpTracks[mpCurrent].title;
+document.getElementById('mpArtist').textContent = mpTracks[mpCurrent].artist;
 mpBuildList();
 </script>
 </body>
