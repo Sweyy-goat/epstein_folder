@@ -140,7 +140,6 @@
   .memory-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,107,157,.1);border-radius:12px;padding:1rem 1.25rem;font-size:.9rem;color:rgba(255,255,255,.7);animation:slide-in .4s ease;display:flex;align-items:flex-start;gap:.75rem;}
   @keyframes slide-in{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
 
-  /* ===== MUSIC PLAYER ===== */
   #music{padding:5rem 2rem;text-align:center;background:rgba(255,255,255,.015);position:relative;z-index:2;}
 
   .music-player{
@@ -158,27 +157,23 @@
   .mp-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff;line-height:1.2;text-align:left;}
   .mp-artist{font-size:.78rem;color:rgba(255,255,255,.45);margin-top:3px;text-align:left;}
 
-  /* progress */
   .mp-progress{margin-bottom:1rem;}
   .mp-bar-wrap{position:relative;height:4px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer;margin-bottom:.4rem;}
   .mp-bar-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--lavender));border-radius:2px;width:0%;pointer-events:none;}
   .mp-bar-input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;margin:0;-webkit-appearance:none;appearance:none;}
   .mp-times{display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.3);}
 
-  /* controls */
   .mp-controls{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1rem;}
   .mp-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s;}
   .mp-btn:hover{background:rgba(255,107,157,.2);border-color:rgba(255,107,157,.4);}
   .mp-btn.play{width:50px;height:50px;font-size:1.2rem;background:linear-gradient(135deg,var(--rose),var(--violet));border:none;box-shadow:0 6px 24px rgba(255,75,123,.4);}
   .mp-btn.play:hover{transform:scale(1.06);box-shadow:0 10px 30px rgba(255,75,123,.5);}
 
-  /* volume */
   .mp-vol{display:flex;align-items:center;gap:8px;padding:0 1.75rem 1.25rem;}
   .mp-vol-icon{font-size:.9rem;color:rgba(255,255,255,.35);}
   .mp-vol-bar{flex:1;height:3px;-webkit-appearance:none;appearance:none;background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer;border:none;}
   .mp-vol-bar::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--pink);cursor:pointer;border:none;}
 
-  /* tracklist */
   .mp-tracklist{border-top:1px solid rgba(255,107,157,.1);}
   .mp-track{display:flex;align-items:center;gap:10px;padding:.7rem 1.75rem;cursor:pointer;border:none;background:none;width:100%;text-align:left;transition:background .15s;border-bottom:1px solid rgba(255,255,255,.03);}
   .mp-track:last-child{border-bottom:none;}
@@ -321,7 +316,7 @@
   <h1 class="hero-title"><span>Happy</span><span>Birthday</span></h1>
   <div class="hero-name">Christa 🌸</div>
   <p class="hero-sub">Today the universe paused, smiled, and said — <em>"She deserves everything."</em></p>
-  <div class="hero-date">June 16, 2005 · Turning 20 🎂</div>
+  <div class="hero-date">June 16, 2005 · Turning 21 🎂</div>
   <div class="hero-cta">
     <a href="#games" class="btn btn-primary">🎮 Play Games</a>
     <a href="#notes" class="btn btn-ghost">💌 Open Your Gifts</a>
@@ -361,7 +356,7 @@
     <div class="note-card" onclick="spawnHearts(event)"><div class="note-icon">🌸</div><div class="note-title">You light up every room</div><div class="note-body">There's something about the way you walk in — the whole energy shifts. People feel it, even if they can't name it. That's a rare kind of magic.</div></div>
     <div class="note-card" onclick="spawnHearts(event)"><div class="note-icon">💫</div><div class="note-title">Your laugh is someone's favourite sound</div><div class="note-body">Unfiltered, real, contagious. The kind that makes strangers look over and smile without even knowing why.</div></div>
     <div class="note-card" onclick="spawnHearts(event)"><div class="note-icon">🌙</div><div class="note-title">You are the dream itself</div><div class="note-body">Not just someone in someone's dream — you are the dream. Vivid, impossible, and somehow real all at once.</div></div>
-    <div class="note-card" onclick="spawnHearts(event)"><div class="note-icon">🦋</div><div class="note-title">Growing looks gorgeous on you</div><div class="note-body">Every year adds something — depth, wisdom, softness, fire. At 20, you're just getting started, and it's already breathtaking.</div></div>
+    <div class="note-card" onclick="spawnHearts(event)"><div class="note-icon">🦋</div><div class="note-title">Growing looks gorgeous on you</div><div class="note-body">Every year adds something — depth, wisdom, softness, fire. At 21, you're just getting started, and it's already breathtaking.</div></div>
     <div class="note-card" onclick="spawnHearts(event)"><div class="note-icon">✨</div><div class="note-title">Your kindness is your superpower</div><div class="note-body">In a world that sometimes forgets to be gentle, you remember. And that makes you one of the strongest people alive.</div></div>
     <div class="note-card" onclick="spawnHearts(event)"><div class="note-icon">🌺</div><div class="note-title">You're allowed to take up space</div><div class="note-body">Your dreams, your voice, your presence — they all belong here. Never shrink yourself for a room that doesn't know your worth.</div></div>
   </div>
@@ -388,7 +383,7 @@
     <div style="margin-top:1rem"><button class="btn btn-primary" onclick="addMemory()" style="width:100%">🌸 Add to the jar</button></div>
   </div>
   <div class="memories-list" id="memoriesList">
-    <div class="memory-item"><span>🌸</span><span>Happy birthday Christa! May 20 be the year you bloom the most. You deserve every beautiful thing life is preparing for you. 💕</span></div>
+    <div class="memory-item"><span>🌸</span><span>Happy birthday Christa! May 21 be the year you bloom the most. You deserve every beautiful thing life is preparing for you. 💕</span></div>
     <div class="memory-item"><span>✨</span><span>The world is genuinely a better place because you're in it. Never forget that. Here's to an incredible year!</span></div>
   </div>
 </section>
@@ -441,11 +436,11 @@
   <h2 class="section-title">Everyone's rooting for you</h2>
   <div class="wish-wall">
     <div class="wish-bubble">"May your 20s be absolutely magical — full of love, laughter, and all your wildest dreams coming true."<div class="wish-from">— The stars ⭐</div></div>
-    <div class="wish-bubble">"You were born to do great things. This is just year one of the best decade of your life."<div class="wish-from">— The universe 🌌</div></div>
+    <div class="wish-bubble">"You were born to do great things. This is just another year of the best decade of your life."<div class="wish-from">— The universe 🌌</div></div>
     <div class="wish-bubble">"Here's to coffee, chaos, and a whole lot of beautiful memories waiting to happen."<div class="wish-from">— Your future self 🌸</div></div>
-    <div class="wish-bubble">"20 looks incredible on you. And 30 is going to be even better."<div class="wish-from">— Time itself ⌛</div></div>
+    <div class="wish-bubble">"21 looks incredible on you. And the years ahead are going to be even better."<div class="wish-from">— Time itself ⌛</div></div>
     <div class="wish-bubble">"Keep being the kind of person who makes rooms brighter just by entering them."<div class="wish-from">— Every room you've been in 💡</div></div>
-    <div class="wish-bubble">"You've survived 20 years of plot twists. Here's to a chapter that's all yours."<div class="wish-from">— Your story 📖</div></div>
+    <div class="wish-bubble">"You've survived 21 years of plot twists. Here's to a chapter that's all yours."<div class="wish-from">— Your story 📖</div></div>
   </div>
 </section>
 
@@ -456,7 +451,7 @@
     <div class="letter-body">
       Dear Christa,<br><br>
       On the day you were born, the world quietly got better. Not with fanfare, not with a headline — just a gentle, irreversible shift toward something warmer and more beautiful.<br><br>
-      You are twenty now. Twenty years of kindness, of laughter, of quiet strength and loud joy. Twenty years of becoming exactly who you were always supposed to be.<br><br>
+      You are twenty-one now. Twenty-one years of kindness, of laughter, of quiet strength and loud joy. Twenty-one years of becoming exactly who you were always supposed to be.<br><br>
       I hope this birthday feels like a warm hug from the universe — a reminder that you are deeply, completely, endlessly loved. Not for what you do, but for who you are. That wild, wonderful, one-of-a-kind person who makes life more worth living for everyone lucky enough to know you.<br><br>
       Here's to you, Christa. The dreamer. The giver. The girl with the best laugh in every room.<br><br>
       May this year bring you more joy than you can hold, and may you always know — you are enough. You always have been. 🌸
@@ -479,9 +474,6 @@
 </div>
 
 <script>
-// ============================================================
-//  VISUAL INTENSITY SLIDER
-// ============================================================
 const visSlider = document.getElementById('vis-slider');
 const visIcon   = document.getElementById('vis-icon');
 let intensity   = 0.7;
@@ -494,9 +486,6 @@ visSlider.addEventListener('input', function(){
   document.querySelectorAll('.hero-glow').forEach(g => g.style.opacity = intensity);
 });
 
-// ============================================================
-//  BACKGROUND STAR CANVAS
-// ============================================================
 const bgCanvas = document.getElementById('constellation-canvas');
 const bgCtx    = bgCanvas.getContext('2d');
 let bgStars    = [];
@@ -565,9 +554,6 @@ function animateBg(){
 }
 animateBg();
 
-// ============================================================
-//  FLOATING PARTICLES
-// ============================================================
 const particleContainer = document.getElementById('particles');
 const COLORS = ['#FF6B9D','#C084FC','#FBBF24','#FF8FB3','#A855F7','#FFB3CC'];
 let particles = [];
@@ -589,9 +575,6 @@ function updateParticleIntensity(){
   while(particles.length > target + 5){ particles.shift().remove(); }
 }
 
-// ============================================================
-//  INTERACTIVE CONSTELLATION CANVAS
-// ============================================================
 const iCanvas = document.getElementById('constell-interactive');
 const iCtx    = iCanvas.getContext('2d');
 let iStars    = [], iName = '';
@@ -704,9 +687,6 @@ function saveConstellation(){
 window.addEventListener('resize', () => setTimeout(resizeICanvas, 100));
 setTimeout(resizeICanvas, 200);
 
-// ============================================================
-//  COUNTDOWN
-// ============================================================
 function updateCountdown(){
   const now = new Date();
   let target = new Date('2026-06-16T00:00:00');
@@ -726,16 +706,10 @@ function updateCountdown(){
 }
 setInterval(updateCountdown, 1000); updateCountdown();
 
-// ============================================================
-//  SCROLL REVEAL
-// ============================================================
 const revEls = document.querySelectorAll('.reveal');
 const revObs = new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.12});
 revEls.forEach(r=>revObs.observe(r));
 
-// ============================================================
-//  HEART SPARKS
-// ============================================================
 function spawnHearts(e){
   const emojis=['❤️','💕','🌸','💖','✨','💗','🦋'];
   for(let i=0;i<6;i++){
@@ -752,9 +726,6 @@ function spawnHearts(e){
   }
 }
 
-// ============================================================
-//  CONFETTI
-// ============================================================
 function launchConfetti(){
   const cols=['#FF6B9D','#C084FC','#FBBF24','#FF8FB3','#6EE7B7','#A5F3FC'];
   for(let i=0;i<90;i++) setTimeout(()=>{
@@ -766,17 +737,11 @@ function launchConfetti(){
   },i*25);
 }
 
-// ============================================================
-//  MODAL
-// ============================================================
 function openModal(html){ document.getElementById('modalContent').innerHTML=html; document.getElementById('modalOverlay').classList.add('active'); }
 function closeModal(){ document.getElementById('modalOverlay').classList.remove('active'); }
 function closeModalOutside(e){ if(e.target===document.getElementById('modalOverlay')) closeModal(); }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
-// ============================================================
-//  GAMES
-// ============================================================
 const matchEmojis=['🌸','💕','✨','🦋','🌙','💖','🌺','🎂'];
 let matchCards=[],matchFlipped=[],matchSolved=0,matchLock=false;
 
@@ -967,9 +932,6 @@ function openGame(type){
   else if(type==='doodle'){ openModal(doodleHTML());setTimeout(initDoodle,100); }
 }
 
-// ============================================================
-//  MEMORY JAR
-// ============================================================
 function addMemory(){
   const input=document.getElementById('memInput');
   const text=input.value.trim(); if(!text)return;
@@ -982,9 +944,6 @@ function addMemory(){
   spawnHearts({clientX:window.innerWidth/2,clientY:window.innerHeight/2});
 }
 
-// ============================================================
-//  NATIVE INTERACTION PLAYER INFRASTRUCTURE
-// ============================================================
 const mpTracks = [
   { title: 'Blue', artist: 'Yung Kai', emoji: '💙', src: 'music/blue.mp3' },
   { title: 'Golden Brown', artist: 'The Stranglers', emoji: '🤎', src: 'music/Golden Brown.mp3' },
@@ -1019,7 +978,6 @@ function mpBuildList(){
       <span class="mp-track-dur" id="mpDur-${i}">--:--</span>
     </button>`).join('');
     
-  // Pre-calculate track row metadata durations cleanly
   mpTracks.forEach((t, i) => {
     const tempAudio = new Audio(t.src);
     tempAudio.addEventListener('loadedmetadata', () => {
@@ -1088,7 +1046,6 @@ function mpNext(){
   mpAudio.play().then(() => mpSetPlayingState(true)).catch(() => mpSetPlayingState(false));
 }
 
-// Audio Runtime Synchronization Hooks
 mpAudio.addEventListener('timeupdate', () => {
   if (!mpAudio.duration) return;
   const pct = (mpAudio.currentTime / mpAudio.duration) * 100;
@@ -1105,18 +1062,15 @@ mpAudio.addEventListener('ended', () => {
   mpNext();
 });
 
-// User seek tracking interactions
 document.getElementById('mpBarInput').addEventListener('input', function(){
   if (!mpAudio.duration) return;
   mpAudio.currentTime = (this.value / 100) * mpAudio.duration;
 });
 
-// Dynamic volume attenuation mapping
 document.getElementById('mpVol').addEventListener('input', function(){
   mpAudio.volume = parseFloat(this.value);
 });
 
-// Initialize Native Runtime Track Array Layouts
 mpAudio.src = mpTracks[mpCurrent].src;
 document.getElementById('mpArt').textContent = mpTracks[mpCurrent].emoji;
 document.getElementById('mpTitle').textContent = mpTracks[mpCurrent].title;
